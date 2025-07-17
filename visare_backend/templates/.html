@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="text-2xl fw-bold text-black mb-4">Configurações</h1>
+<ul class="nav nav-tabs mb-4">
+  <li class="nav-item"><a class="nav-link active" href="#">Modelos de Documento</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Usuários</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Preferências</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane fade show active">
+    <h2 class="fs-5 fw-bold text-black mb-2">Modelos de Documento</h2>
+    <div class="d-flex gap-4">
+      <textarea class="form-control border-rosa text-black w-50" rows="6" placeholder="Editor visual do modelo"></textarea>
+      <div class="w-50 h-100 bg-color4 rounded d-flex align-items-center justify-content-center" style="height: 150px; color: var(--color1);">[Pré-visualização]</div>
+    </div>
+  </div>
+</div>
+{% endblock %} 

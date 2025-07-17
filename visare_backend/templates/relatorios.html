@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <h1 class="text-2xl fw-bold text-black mb-0">Relatórios</h1>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-rosa" id="btnRelatorioRapido"><i class="bi bi-lightning"></i> Relatório Rápido</button>
+    <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow"><i class="bi bi-gear me-1"></i> Configurar Relatórios</button>
+  </div>
+</div>
+
+<!-- Filtros Inteligentes -->
+<div class="card shadow-sm rounded p-3 mb-4">
+  <form class="row g-2 align-items-end" autocomplete="off">
+    <div class="col-md-2">
+      <label class="form-label mb-1">Período</label>
+      <select class="form-select" name="periodo" id="periodoRelatorio">
+        <option value="hoje">Hoje</option>
+        <option value="semana" selected>Esta Semana</option>
+        <option value="mes">Este Mês</option>
+        <option value="trimestre">Este Trimestre</option>
+        <option value="ano">Este Ano</option>
+        <option value="personalizado">Personalizado</option>
+      </select>
+    </div>
+    <div class="col-md-2" id="dataInicioContainer" style="display: none;">
+      <label class="form-label mb-1">Data Início</label>
+      <input type="date" class="form-control" name="data_inicio" id="dataInicio">
+    </div>
+    <div class="col-md-2" id="dataFimContainer" style="display: none;">
+      <label class="form-label mb-1">Data Fim</label>
+      <input type="date" class="form-control" name="data_fim" id="dataFim">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">Clínica</label>
+      <select class="form-select" name="clinica">
+        <option value="">Todas</option>
+        <option>Clínica A</option>
+        <option>Clínica B</option>
+        <option>Clínica C</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">Profissional</label>
+      <select class="form-select" name="profissional">
+        <option value="">Todos</option>
+        <option>Dra. Ana</option>
+        <option>Dr. João</option>
+        <option>Dra. Maria</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">Tipo de Relatório</label>
+      <select class="form-select" name="tipo_relatorio" id="tipoRelatorio">
+        <option value="atendimentos">Atendimentos</option>
+        <option value="receitas">Receitas</option>
+        <option value="financeiro">Financeiro</option>
+        <option value="pacientes">Pacientes</option>
+        <option value="produtividade">Produtividade</option>
+      </select>
+    </div>
+    <div class="col-md-1 d-flex gap-2">
+      <button type="submit" class="btn btn-rosa w-100"><i class="bi bi-search"></i></button>
+      <button type="reset" class="btn btn-outline-rosa w-100"><i class="bi bi-x-lg"></i></button>
+    </div>
+  </form>
+</div>
+
+<!-- Painel de Performance -->
+<div class="row g-4 mb-4">
+  <div class="col-12 col-md-3">
+    <div class="bg-white rounded-lg shadow-md p-3 text-center">
+      <div class="fw-semibold text-black mb-1">Total de Atendimentos</div>
+      <div class="fs-4 fw-bold text-color1">{{ total_atendimentos|default:'156' }}</div>
+      <div class="small text-success"><i class="bi bi-arrow-up"></i> +12% vs mês anterior</div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <div class="bg-white rounded-lg shadow-md p-3 text-center">
+      <div class="fw-semibold text-black mb-1">Receitas Emitidas</div>
+      <div class="fs-4 fw-bold text-success">{{ total_receitas|default:'89' }}</div>
+      <div class="small text-success"><i class="bi bi-arrow-up"></i> +8% vs mês anterior</div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <div class="bg-white rounded-lg shadow-md p-3 text-center">
+      <div class="fw-semibold text-black mb-1">Novos Pacientes</div>
+      <div class="fs-4 fw-bold text-info">{{ novos_pacientes|default:'23' }}</div>
+      <div class="small text-success"><i class="bi bi-arrow-up"></i> +15% vs mês anterior</div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <div class="bg-white rounded-lg shadow-md p-3 text-center">
+      <div class="fw-semibold text-black mb-1">Faturamento</div>
+      <div class="fs-4 fw-bold text-warning">R$ {{ faturamento|default:'12.450' }}</div>
+      <div class="small text-success"><i class="bi bi-arrow-up"></i> +18% vs mês anterior</div>
+    </div>
+  </div>
+</div>
+
+<!-- Gráficos e Visualizações -->
+<div class="row g-4 mb-4">
+  <div class="col-12 col-lg-8">
+    <div class="card shadow-sm rounded">
+      <div class="card-header bg-light d-flex justify-content-between align-items-center">
+        <h6 class="mb-0 fw-bold text-black">Atendimentos por Período</h6>
+        <div class="btn-group btn-group-sm" role="group">
+          <button type="button" class="btn btn-outline-rosa active" data-chart-period="week">Semana</button>
+          <button type="button" class="btn btn-outline-rosa" data-chart-period="month">Mês</button>
+          <button type="button" class="btn btn-outline-rosa" data-chart-period="year">Ano</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="h-100 bg-color4 rounded d-flex align-items-center justify-content-center" style="height: 300px;">
+          <div class="text-center">
+            <i class="bi bi-graph-up fs-1 text-muted"></i>
+            <p class="mt-2 text-muted">Gráfico de Atendimentos</p>
+            <small class="text-muted">Dados do período selecionado</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm rounded h-100">
+      <div class="card-header bg-light">
+        <h6 class="mb-0 fw-bold text-black">Distribuição por Clínica</h6>
+      </div>
+      <div class="card-body">
+        <div class="h-100 bg-color4 rounded d-flex align-items-center justify-content-center" style="height: 300px;">
+          <div class="text-center">
+            <i class="bi bi-pie-chart fs-1 text-muted"></i>
+            <p class="mt-2 text-muted">Gráfico de Pizza</p>
+            <small class="text-muted">Atendimentos por clínica</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabela Detalhada -->
+<div class="card shadow-sm rounded">
+  <div class="card-header bg-light d-flex justify-content-between align-items-center">
+    <h6 class="mb-0 fw-bold text-black">Detalhamento de Atendimentos</h6>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-rosa btn-sm" id="btnExportarPDF"><i class="bi bi-file-earmark-pdf"></i> PDF</button>
+      <button class="btn btn-outline-rosa btn-sm" id="btnExportarExcel"><i class="bi bi-file-earmark-excel"></i> Excel</button>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-striped bg-white rounded-lg shadow-md overflow-hidden align-middle mb-0">
+        <thead class="bg-color4 text-black text-uppercase text-xs tracking-wide">
+          <tr>
+            <th>Paciente</th>
+            <th>Data</th>
+            <th>Clínica</th>
+            <th>Profissional</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Valor</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for atendimento in atendimentos %}
+          <tr class="hover-shadow-sm" tabindex="0">
+            <td class="fw-semibold text-black">{{ atendimento.paciente }}</td>
+            <td class="text-black">{{ atendimento.data|date:'d/m/Y' }}</td>
+            <td class="text-black">{{ atendimento.clinica }}</td>
+            <td class="text-black">{{ atendimento.profissional }}</td>
+            <td>
+              <span class="badge {% if atendimento.tipo == 'Consulta' %}bg-primary{% elif atendimento.tipo == 'Receita' %}bg-success{% elif atendimento.tipo == 'Retorno' %}bg-info{% else %}bg-secondary{% endif %}">
+                {{ atendimento.tipo }}
+              </span>
+            </td>
+            <td>
+              <span class="badge {% if atendimento.status == 'Concluído' %}bg-success{% elif atendimento.status == 'Agendado' %}bg-warning text-dark{% elif atendimento.status == 'Cancelado' %}bg-danger{% else %}bg-secondary{% endif %}">
+                {{ atendimento.status }}
+              </span>
+            </td>
+            <td class="text-black fw-semibold">R$ {{ atendimento.valor|default:'150,00' }}</td>
+            <td class="text-center">
+              <div class="btn-group" role="group">
+                <button class="btn btn-link text-color1 p-1" data-bs-toggle="tooltip" title="Ver Detalhes"><i class="bi bi-eye"></i></button>
+                <button class="btn btn-link text-color1 p-1" data-bs-toggle="tooltip" title="Editar"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-link text-success p-1" data-bs-toggle="tooltip" title="Gerar Relatório"><i class="bi bi-file-earmark-text"></i></button>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="8" class="text-center text-muted py-4">
+              Nenhum atendimento encontrado para os filtros selecionados.<br>
+              <small>Tente ajustar os filtros ou selecionar um período diferente.</small>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Paginação -->
+<div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+  <div class="text-muted small">
+    Mostrando {{ page_start|default:'1' }}–{{ page_end|default:'10' }} de {{ total_registros|default:'156' }} registros
+  </div>
+  <nav>
+    <ul class="pagination mb-0">
+      <li class="page-item disabled"><a class="page-link" href="#">&laquo; Anterior</a></li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Próximo &raquo;</a></li>
+    </ul>
+  </nav>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-rosa btn-sm"><i class="bi bi-download"></i> Exportar Dados</button>
+    <button class="btn btn-outline-rosa btn-sm"><i class="bi bi-share"></i> Compartilhar</button>
+  </div>
+</div>
+
+<!-- Modal de Relatório Rápido -->
+<div class="modal fade" id="modalRelatorioRapido" tabindex="-1" aria-labelledby="modalRelatorioRapidoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRelatorioRapidoLabel">Relatório Rápido</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Tipo de Relatório</label>
+            <select class="form-select">
+              <option>Resumo Diário</option>
+              <option>Resumo Semanal</option>
+              <option>Resumo Mensal</option>
+              <option>Comparativo</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Formato</label>
+            <select class="form-select">
+              <option>PDF</option>
+              <option>Excel</option>
+              <option>PowerPoint</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Incluir</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="incluirGraficos" checked>
+              <label class="form-check-label" for="incluirGraficos">Gráficos e visualizações</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="incluirTabelas" checked>
+              <label class="form-check-label" for="incluirTabelas">Tabelas detalhadas</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="incluirComparativos">
+              <label class="form-check-label" for="incluirComparativos">Comparativos com períodos anteriores</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-rosa">Gerar Relatório</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Controle de período personalizado
+  document.getElementById('periodoRelatorio').addEventListener('change', function() {
+    const dataInicioContainer = document.getElementById('dataInicioContainer');
+    const dataFimContainer = document.getElementById('dataFimContainer');
+    
+    if (this.value === 'personalizado') {
+      dataInicioContainer.style.display = '';
+      dataFimContainer.style.display = '';
+    } else {
+      dataInicioContainer.style.display = 'none';
+      dataFimContainer.style.display = 'none';
+    }
+  });
+  
+  // Botão de relatório rápido
+  document.getElementById('btnRelatorioRapido').addEventListener('click', function() {
+    new bootstrap.Modal(document.getElementById('modalRelatorioRapido')).show();
+  });
+  
+  // Controle de período dos gráficos
+  document.querySelectorAll('[data-chart-period]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-chart-period]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      // Aqui você pode implementar a atualização do gráfico
+    });
+  });
+  
+  // Exportação
+  document.getElementById('btnExportarPDF').addEventListener('click', function() {
+    alert('Exportando relatório em PDF...');
+  });
+  
+  document.getElementById('btnExportarExcel').addEventListener('click', function() {
+    alert('Exportando relatório em Excel...');
+  });
+});
+</script>
+{% endblock %} 

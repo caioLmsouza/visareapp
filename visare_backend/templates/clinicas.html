@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <h1 class="text-2xl fw-bold text-black mb-0">Clínicas</h1>
+  <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow ms-auto"><i class="bi bi-hospital me-1"></i> Nova Clínica</button>
+</div>
+
+<!-- Filtros Inteligentes -->
+<div class="card shadow-sm rounded p-3 mb-4">
+  <form class="row g-2 align-items-end" autocomplete="off">
+    <div class="col-md-3">
+      <label class="form-label mb-1">Nome</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-building"></i></span>
+        <input type="text" class="form-control" placeholder="Buscar por nome..." name="nome">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label mb-1">Cidade</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+        <input type="text" class="form-control" placeholder="Buscar por cidade..." name="cidade">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label mb-1">Responsável</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-person"></i></span>
+        <input type="text" class="form-control" placeholder="Buscar por responsável..." name="responsavel">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">Status</label>
+      <select class="form-select" name="status">
+        <option>Todos</option>
+        <option>Ativa</option>
+        <option>Inativa</option>
+      </select>
+    </div>
+    <div class="col-md-1 d-flex gap-2">
+      <button type="submit" class="btn btn-rosa w-100"><i class="bi bi-search"></i></button>
+      <button type="reset" class="btn btn-outline-secondary w-100"><i class="bi bi-x-lg"></i></button>
+    </div>
+  </form>
+</div>
+
+<!-- Tabela de Clínicas -->
+<div class="table-responsive">
+  <table class="table table-striped bg-white rounded-lg shadow-md overflow-hidden align-middle">
+    <thead class="bg-color4 text-black text-uppercase text-xs tracking-wide">
+      <tr>
+        <th></th>
+        <th>Nome</th>
+        <th>Cidade</th>
+        <th>Responsável</th>
+        <th>Telefone</th>
+        <th>Status</th>
+        <th>Pacientes Ativos</th>
+        <th>Próxima Consulta</th>
+        <th class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for clinica in clinicas %}
+      <tr class="hover-shadow-sm" tabindex="0">
+        <td>
+          {% if clinica.logo %}
+            <img src="{{ clinica.logo.url }}" alt="Logo" class="rounded" style="height: 32px; width: 32px;">
+          {% else %}
+            <span class="badge bg-secondary"><i class="bi bi-hospital"></i></span>
+          {% endif %}
+        </td>
+        <td>
+          <span class="fw-semibold text-black">{{ clinica.nome }}</span>
+          {% if clinica.atual %}
+            <span class="badge bg-success ms-1">Clínica Atual</span>
+          {% endif %}
+        </td>
+        <td class="text-black">{{ clinica.cidade }}</td>
+        <td class="text-black">{{ clinica.responsavel }}</td>
+        <td class="text-black">{{ clinica.telefone }}</td>
+        <td>
+          <span class="badge {% if clinica.status == 'Ativa' %}bg-success{% else %}bg-secondary{% endif %}">{{ clinica.status }}</span>
+        </td>
+        <td>
+          <span class="badge bg-info text-dark">{{ clinica.pacientes_ativos|default:'—' }}</span>
+        </td>
+        <td>
+          <span class="badge {% if clinica.proxima_consulta_status == 'hoje' %}bg-danger{% elif clinica.proxima_consulta_status == 'semana' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+            {{ clinica.proxima_consulta|default:'—' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <div class="btn-group" role="group">
+            <button class="btn btn-link text-color1 p-1" data-bs-toggle="tooltip" title="Ver Detalhes"><i class="bi bi-eye"></i></button>
+            <button class="btn btn-link text-color1 p-1" data-bs-toggle="tooltip" title="Editar"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-link text-danger p-1" data-bs-toggle="tooltip" title="Excluir" data-bs-toggle="modal" data-bs-target="#modalExcluirClinica"><i class="bi bi-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="9" class="text-center text-muted py-4">
+          Nenhuma clínica cadastrada ainda.<br>
+          <a href="#" class="btn btn-rosa mt-2"><i class="bi bi-hospital"></i> Cadastrar a primeira clínica</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Paginação -->
+<div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+  <div class="text-muted small">
+    Exibindo {{ page_start }}–{{ page_end }} de {{ total_clinicas }} clínicas
+  </div>
+  <nav>
+    <ul class="pagination mb-0">
+      <li class="page-item"><a class="page-link" href="#">&laquo; Anterior</a></li>
+      <li class="page-item"><a class="page-link" href="#">Próximo &raquo;</a></li>
+    </ul>
+  </nav>
+  <button class="btn btn-outline-secondary btn-sm ms-2"><i class="bi bi-download"></i> Exportar</button>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div class="modal fade" id="modalExcluirClinica" tabindex="-1" aria-labelledby="modalExcluirClinicaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalExcluirClinicaLabel">Confirmar exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir esta clínica? Esta ação não poderá ser desfeita.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 

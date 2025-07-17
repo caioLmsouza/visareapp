@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- 1. Boas-vindas e filtros -->
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+  <div>
+    <h2 class="fw-bold text-black mb-1">Olá, Claudiane!</h2>
+    <div class="text-gray-700">Hoje você está atendendo na <span class="fw-semibold text-color1">Clínica Visão Ideal</span>. Aqui está um resumo do seu dia.</div>
+  </div>
+  <div class="d-flex gap-2 flex-wrap">
+    <select class="form-select bg-white text-black border-rosa" style="min-width: 180px;">
+      <option>Todas as Clínicas</option>
+      <option>Clínica Visão Ideal</option>
+      <option>Clínica São Lucas</option>
+    </select>
+    <select class="form-select bg-white text-black border-rosa" style="min-width: 120px;">
+      <option>Julho/2025</option>
+      <option>Junho/2025</option>
+    </select>
+    <select class="form-select bg-white text-black border-rosa" style="min-width: 140px;">
+      <option>Todos os profissionais</option>
+      <option>Dra. Fernanda</option>
+      <option>Dr. João</option>
+    </select>
+  </div>
+</div>
+
+<!-- 2. Alertas e Prioridades -->
+<div class="mb-4">
+  <div class="d-flex flex-column gap-2">
+    <div class="position-relative bg-warning bg-opacity-25 border-start border-4 border-warning rounded shadow px-3 py-2" style="min-height: 56px;">
+      <button type="button" class="btn-close btn-sm position-absolute" style="top: 6px; right: 10px; z-index: 2;" aria-label="Fechar"></button>
+      <div class="d-flex align-items-center" style="padding-right: 32px;">
+        <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+        <span class="fw-semibold text-black">⚠️ 3 Consultas estão vencidas</span>
+        <a href="/consultas/" class="btn btn-warning btn-sm ms-auto">Ver agora</a>
+      </div>
+    </div>
+    <div class="position-relative bg-warning bg-opacity-25 border-start border-4 border-warning rounded shadow px-3 py-2" style="min-height: 56px;">
+      <button type="button" class="btn-close btn-sm position-absolute" style="top: 6px; right: 10px; z-index: 2;" aria-label="Fechar"></button>
+      <div class="d-flex align-items-center" style="padding-right: 32px;">
+        <i class="bi bi-folder-fill text-warning me-2"></i>
+        <span class="fw-semibold text-black">📂 5 Documentos aguardando assinatura</span>
+        <a href="/relatorios/" class="btn btn-warning btn-sm ms-auto">Ver agora</a>
+      </div>
+    </div>
+    <div class="position-relative bg-warning bg-opacity-25 border-start border-4 border-warning rounded shadow px-3 py-2" style="min-height: 56px;">
+      <button type="button" class="btn-close btn-sm position-absolute" style="top: 6px; right: 10px; z-index: 2;" aria-label="Fechar"></button>
+      <div class="d-flex align-items-center" style="padding-right: 32px;">
+        <i class="bi bi-clipboard-check text-warning me-2"></i>
+        <span class="fw-semibold text-black">📋 2 Fichas incompletas</span>
+        <a href="/fichas/" class="btn btn-warning btn-sm ms-auto">Ver agora</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Painéis de Métricas -->
+<div class="row g-4 mb-4">
+  <!-- Totais -->
+  <div class="col-12 col-md-4">
+    <div class="bg-white rounded-lg shadow-md p-3 mb-3">
+      <div class="fw-semibold text-black mb-2">Indicadores Totais</div>
+      <div class="d-flex flex-wrap gap-3">
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-color1">1.200</div>
+          <div class="text-gray-700">Pacientes</div>
+        </div>
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-color1">320</div>
+          <div class="text-gray-700">Consultas no mês</div>
+        </div>
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-color1">210</div>
+          <div class="text-gray-700">Receitas emitidas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Hoje -->
+  <div class="col-12 col-md-4">
+    <div class="bg-white rounded-lg shadow-md p-3 mb-3">
+      <div class="fw-semibold text-black mb-2">Indicadores do Dia</div>
+      <div class="d-flex flex-wrap gap-3">
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-color1">18</div>
+          <div class="text-gray-700">Consultas hoje</div>
+        </div>
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-color1">7</div>
+          <div class="text-gray-700">Pacientes do dia</div>
+        </div>
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-color1">5</div>
+          <div class="text-gray-700">Receitas hoje</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Urgência -->
+  <div class="col-12 col-md-4">
+    <div class="bg-white rounded-lg shadow-md p-3 mb-3">
+      <div class="fw-semibold text-black mb-2">Urgência</div>
+      <div class="d-flex flex-wrap gap-3">
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-danger">3</div>
+          <div class="text-gray-700">Consultas vencidas</div>
+        </div>
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-warning">5</div>
+          <div class="text-gray-700">Documentos pendentes</div>
+        </div>
+        <div class="flex-fill">
+          <div class="fs-5 fw-bold text-warning">2</div>
+          <div class="text-gray-700">Atendimentos não finalizados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Próximas Consultas -->
+<div class="bg-white rounded-lg shadow-md p-4 mb-4">
+  <div class="fw-semibold text-black mb-3">Próximas Consultas</div>
+  <ul class="list-group list-group-flush">
+    {% for consulta in proximas_consultas %}
+    <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+      <div>
+        <span class="fw-bold">{{ consulta.paciente }}</span>
+        <span class="text-muted small ms-2">{{ consulta.clinica }}</span>
+        <span class="badge bg-info ms-2">{{ consulta.data_hora }}</span>
+      </div>
+      <a href="{{ consulta.url }}" class="btn btn-sm btn-rosa">Ver Detalhes</a>
+    </li>
+    {% empty %}
+    <li class="list-group-item text-muted">Nenhuma consulta agendada.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- 4. Gráficos inteligentes -->
+<div class="row g-4 mb-4">
+  <div class="col-12 col-lg-6">
+    <div class="bg-white rounded-lg shadow-md p-4 h-100">
+      <div class="fw-semibold text-black mb-3">Atendimentos por Dia (últimos 7 dias)</div>
+      <canvas id="chartAtendimentos"></canvas>
+      <!-- Script Chart.js será adicionado depois -->
+    </div>
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="bg-white rounded-lg shadow-md p-4 h-100">
+      <div class="fw-semibold text-black mb-3">Pacientes por Clínica (mês)</div>
+      <canvas id="chartPacientes"></canvas>
+      <!-- Script Chart.js será adicionado depois -->
+    </div>
+  </div>
+</div>
+
+<!-- 5. Lista dinâmica de receitas -->
+<div class="bg-white rounded-lg shadow-md p-4 mb-4">
+  <div class="fw-semibold text-black mb-3">Últimas Receitas Emitidas</div>
+  <ul class="list-group list-group-flush">
+    {% for receita in receitas %}
+    <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+      <div>
+        <span class="fw-bold">{{ receita.paciente }}</span>
+        <span class="text-muted small ms-2">{{ receita.clinica }}</span>
+        <span class="badge bg-success ms-2">{{ receita.status }}</span>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="{{ receita.url }}" class="btn btn-sm btn-rosa">Ver Receita</a>
+        <a href="{{ receita.pdf_url }}" class="btn btn-sm btn-outline-secondary">Baixar PDF</a>
+      </div>
+    </li>
+    {% empty %}
+    <li class="list-group-item text-muted">Nenhuma receita encontrada.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %} 

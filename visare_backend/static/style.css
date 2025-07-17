@@ -1,0 +1,63 @@
+/* Paleta de cores VisareApp */
+:root {
+  --color1: #ef87b8;
+  --color2: #f3a0ca;
+  --color3: #f7badc;
+  --color4: #fbd3ed;
+  --color5: #ffecff;
+  --text-black: #000000;
+}
+
+body {
+  background: var(--color5);
+  color: var(--text-black);
+}
+
+.bg-color1 { background: var(--color1) !important; }
+.bg-color2 { background: var(--color2) !important; }
+.bg-color3 { background: var(--color3) !important; }
+.bg-color4 { background: var(--color4) !important; }
+.bg-color5 { background: var(--color5) !important; }
+.text-black { color: var(--text-black) !important; }
+
+.btn-rosa {
+  background: linear-gradient(90deg, var(--color1) 0%, var(--color2) 100%);
+  color: var(--text-black);
+  font-weight: 600;
+}
+
+.btn-rosa:hover {
+  background: linear-gradient(90deg, var(--color2) 0%, var(--color1) 100%);
+}
+
+.border-rosa {
+  border-color: var(--color1) !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--color1);
+  box-shadow: 0 0 0 2px var(--color2);
+} 
+
+/* FullCalendar customizado para VisareApp */
+.fc .fc-toolbar-title {
+  color: #ef87b8;
+  font-weight: bold;
+}
+.fc .fc-button-primary {
+  background-color: #ef87b8;
+  border-color: #ef87b8;
+}
+.fc .fc-button-primary:not(:disabled):hover {
+  background-color: #d16a9e;
+  border-color: #d16a9e;
+}
+.fc-event {
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px #ef87b830;
+}
+.fc-event:hover {
+  box-shadow: 0 4px 16px #ef87b850;
+  background: #fce4f3 !important;
+} 

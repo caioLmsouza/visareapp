@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <h1 class="text-2xl fw-bold text-black mb-0">Pacientes</h1>
+  <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow ms-auto"><i class="bi bi-person-plus me-1"></i> Novo Paciente</button>
+</div>
+
+<!-- Filtros Avançados -->
+<div class="card shadow-sm rounded p-3 mb-4">
+  <form class="row g-2 align-items-end" autocomplete="off">
+    <div class="col-md-3">
+      <label class="form-label mb-1">Nome</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-person"></i></span>
+        <input type="text" class="form-control" placeholder="Buscar por nome..." name="nome">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">CPF</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-credit-card"></i></span>
+        <input type="text" class="form-control" placeholder="Buscar por CPF..." name="cpf">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">Data de Nascimento</label>
+      <input type="date" class="form-control" name="data_nascimento">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">Clínica</label>
+      <select class="form-select" name="clinica">
+        <option>Todas</option>
+        <option>Clínica A</option>
+        <option>Clínica B</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label mb-1">Status</label>
+      <select class="form-select" name="status">
+        <option>Todos</option>
+        <option>Ativo</option>
+        <option>Inativo</option>
+        <option>Em tratamento</option>
+      </select>
+    </div>
+    <div class="col-md-1 d-flex gap-2">
+      <button type="submit" class="btn btn-rosa w-100"><i class="bi bi-search"></i></button>
+      <button type="reset" class="btn btn-outline-secondary w-100"><i class="bi bi-x-lg"></i></button>
+    </div>
+  </form>
+</div>
+
+<!-- Tabela de Pacientes -->
+<div class="table-responsive">
+  <table class="table table-striped bg-white rounded-lg shadow-md overflow-hidden align-middle">
+    <thead class="bg-color4 text-black text-uppercase text-xs tracking-wide">
+      <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Nascimento</th>
+        <th>Telefone</th>
+        <th>Clínica</th>
+        <th>Status</th>
+        <th>Última Consulta</th>
+        <th class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for paciente in pacientes %}
+      <tr class="hover-shadow-sm" tabindex="0">
+        <td class="text-black fw-semibold">{{ paciente.nome }}</td>
+        <td class="text-black">{{ paciente.email }}</td>
+        <td class="text-black">{{ paciente.data_nascimento|date:'d/m/Y' }}</td>
+        <td class="text-black">{{ paciente.telefone }}</td>
+        <td class="text-black">{{ paciente.clinica }}</td>
+        <td>
+          <span class="badge {% if paciente.status == 'Ativo' %}bg-success{% elif paciente.status == 'Em tratamento' %}bg-warning text-dark{% else %}bg-secondary{% endif %}">{{ paciente.status }}</span>
+        </td>
+        <td>
+          <span class="badge {% if paciente.ultima_consulta_status == 'hoje' %}bg-danger{% elif paciente.ultima_consulta_status == 'semana' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+            {{ paciente.ultima_consulta|default:'—' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <div class="btn-group" role="group">
+            <button class="btn btn-link text-color1 p-1" data-bs-toggle="tooltip" title="Visualizar"><i class="bi bi-eye"></i></button>
+            <button class="btn btn-link text-color1 p-1" data-bs-toggle="tooltip" title="Editar"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-link text-danger p-1" data-bs-toggle="tooltip" title="Excluir"><i class="bi bi-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="8" class="text-center text-muted py-4">Nenhum paciente encontrado para os filtros selecionados.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Paginação -->
+<div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+  <div class="text-muted small">
+    Mostrando {{ page_start }}–{{ page_end }} de {{ total_pacientes }} pacientes
+  </div>
+  <nav>
+    <ul class="pagination mb-0">
+      <li class="page-item"><a class="page-link" href="#">&laquo; Anterior</a></li>
+      <li class="page-item"><a class="page-link" href="#">Próximo &raquo;</a></li>
+    </ul>
+  </nav>
+  <button class="btn btn-outline-secondary btn-sm ms-2"><i class="bi bi-download"></i> Exportar</button>
+</div>
+{% endblock %} 

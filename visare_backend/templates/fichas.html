@@ -1,0 +1,701 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row g-4">
+  <!-- Editor Avançado -->
+  <div class="col-lg-8">
+    <div class="card shadow-lg h-100">
+      <div class="card-header bg-light d-flex justify-content-between">
+        <ul class="nav nav-tabs card-header-tabs" id="receitaTabs">
+          <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#dados">Dados</a></li>
+          <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#medidas">Medidas</a></li>
+          <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#lentes">Lentes</a></li>
+          <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#atestados">Atestados</a></li>
+        </ul>
+        <div class="dropdown">
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="bi bi-file-earmark-medical"></i> Templates
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" data-template="miopia">Miopia Simples</a></li>
+            <li><a class="dropdown-item" href="#" data-template="progressiva">Progressivas</a></li>
+          </ul>
+        </div>
+      </div>
+      <form id="form-receita" class="card-body tab-content">
+        <div class="tab-pane fade show active" id="dados">
+          <!-- Escolha do Paciente e Resumo Visual -->
+          <div class="mb-3">
+            <label class="form-label text-black">Paciente <span class="text-danger">*</span></label>
+            <input type="text" class="form-control border-rosa text-black" id="pacienteBusca" placeholder="Buscar paciente...">
+            <div id="resumoPaciente" class="mt-2 d-none card card-body p-2 bg-light border-0">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://ui-avatars.com/api/?name=Paciente+Exemplo" class="rounded-circle" width="48" height="48" alt="Avatar">
+                <div>
+                  <div class="fw-bold" id="resumoNome">Nome do Paciente</div>
+                  <div class="small text-muted" id="resumoNascimento">Nascimento: 01/01/1980</div>
+                  <div class="small text-muted" id="resumoUltimaConsulta">Última consulta: 10/06/2024</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tipo de Prescrição e Condição -->
+          <div class="mb-3">
+            <label class="form-label text-black">Tipo de Prescrição <span class="text-danger">*</span></label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="tipoPrescricao" id="prescOculos" value="oculos" checked>
+              <label class="form-check-label" for="prescOculos">Óculos</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="tipoPrescricao" id="prescLente" value="lente">
+              <label class="form-check-label" for="prescLente">Lente de Contato</label>
+            </div>
+            <div class="mt-2">
+              <label class="form-label text-black">Condição da Prescrição:</label>
+              <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="condInicial"><label class="form-check-label" for="condInicial">Inicial</label></div>
+              <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="condTroca"><label class="form-check-label" for="condTroca">Troca</label></div>
+              <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="condRevisao"><label class="form-check-label" for="condRevisao">Revisão</label></div>
+              <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="condAdaptacao"><label class="form-check-label" for="condAdaptacao">Adaptação</label></div>
+              <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="condOutro"><label class="form-check-label" for="condOutro">Outro</label></div>
+              <input type="text" class="form-control form-control-sm mt-1" id="condOutroTexto" placeholder="Descreva a condição">
+            </div>
+          </div>
+          <!-- Accordions para Anamnese Detalhada -->
+          <div class="accordion" id="accordionAnamnese">
+            <!-- Sintomas Atuais -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingSintomas">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSintomas" aria-expanded="true" aria-controls="collapseSintomas">
+                  <i class="bi bi-emoji-frown me-2"></i>Sintomas Atuais
+                </button>
+              </h2>
+              <div id="collapseSintomas" class="accordion-collapse collapse show" aria-labelledby="headingSintomas" data-bs-parent="#accordionAnamnese">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                    <!-- Sintoma: Ardência -->
+                    <div class="col-md-4">
+                      <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="sintArdencia"><label class="form-check-label" for="sintArdencia">Ardência</label></div>
+                      <select class="form-select form-select-sm mb-1" id="freqArdencia"><option value="">Frequência</option><option>Ocasional</option><option>Frequente</option><option>Constante</option></select>
+                      <select class="form-select form-select-sm" id="intArdencia"><option value="">Intensidade</option><option>Leve</option><option>Moderada</option><option>Intensa</option></select>
+                    </div>
+                    <!-- Sintoma: Coceira -->
+                    <div class="col-md-4">
+                      <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="sintCoceira"><label class="form-check-label" for="sintCoceira">Coceira</label></div>
+                      <select class="form-select form-select-sm mb-1" id="freqCoceira"><option value="">Frequência</option><option>Ocasional</option><option>Frequente</option><option>Constante</option></select>
+                      <select class="form-select form-select-sm" id="intCoceira"><option value="">Intensidade</option><option>Leve</option><option>Moderada</option><option>Intensa</option></select>
+                    </div>
+                    <!-- Sintoma: Fotofobia -->
+                    <div class="col-md-4">
+                      <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="sintFotofobia"><label class="form-check-label" for="sintFotofobia">Fotofobia</label></div>
+                      <select class="form-select form-select-sm mb-1" id="freqFotofobia"><option value="">Frequência</option><option>Ocasional</option><option>Frequente</option><option>Constante</option></select>
+                      <select class="form-select form-select-sm" id="intFotofobia"><option value="">Intensidade</option><option>Leve</option><option>Moderada</option><option>Intensa</option></select>
+                    </div>
+                    <!-- Sintoma: Lacrimejamento -->
+                    <div class="col-md-4">
+                      <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="sintLacrimejamento"><label class="form-check-label" for="sintLacrimejamento">Lacrimejamento</label></div>
+                      <select class="form-select form-select-sm mb-1" id="freqLacrimejamento"><option value="">Frequência</option><option>Ocasional</option><option>Frequente</option><option>Constante</option></select>
+                      <select class="form-select form-select-sm" id="intLacrimejamento"><option value="">Intensidade</option><option>Leve</option><option>Moderada</option><option>Intensa</option></select>
+                    </div>
+                    <!-- Sintoma: Visão embaçada -->
+                    <div class="col-md-4">
+                      <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="sintVisaoEmbacada"><label class="form-check-label" for="sintVisaoEmbacada">Visão embaçada</label></div>
+                      <select class="form-select form-select-sm mb-1" id="freqVisaoEmbacada"><option value="">Frequência</option><option>Ocasional</option><option>Frequente</option><option>Constante</option></select>
+                      <select class="form-select form-select-sm" id="intVisaoEmbacada"><option value="">Intensidade</option><option>Leve</option><option>Moderada</option><option>Intensa</option></select>
+                    </div>
+                    <!-- Sintoma: Outros -->
+                    <div class="col-md-4">
+                      <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="sintOutros"><label class="form-check-label" for="sintOutros">Outros</label></div>
+                      <input type="text" class="form-control form-control-sm mt-1" id="sintOutrosTexto" placeholder="Descreva outros sintomas">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Histórico Médico Geral -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingMedico">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedico" aria-expanded="false" aria-controls="collapseMedico">
+                  <i class="bi bi-heart-pulse me-2"></i>Histórico Médico Geral
+                </button>
+              </h2>
+              <div id="collapseMedico" class="accordion-collapse collapse" aria-labelledby="headingMedico" data-bs-parent="#accordionAnamnese">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="probDiabetes"><label class="form-check-label" for="probDiabetes">Diabetes</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="probHipertensao"><label class="form-check-label" for="probHipertensao">Hipertensão</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="probTireoide"><label class="form-check-label" for="probTireoide">Tireoide</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="probAutoimune"><label class="form-check-label" for="probAutoimune">Doença Autoimune</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="probAlergia"><label class="form-check-label" for="probAlergia">Alergia</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="probOutros"><label class="form-check-label" for="probOutros">Outros</label></div></div>
+                    <div class="col-12"><input type="text" class="form-control form-control-sm mt-1" id="probOutrosTexto" placeholder="Descreva outras condições"></div>
+                    <div class="col-12"><div class="form-check"><input class="form-check-input" type="checkbox" id="cirurgia"><label class="form-check-label" for="cirurgia">Já realizou cirurgias?</label></div></div>
+                    <div class="col-12"><input type="text" class="form-control form-control-sm mt-1" id="cirurgiaTexto" placeholder="Detalhe as cirurgias"></div>
+                    <div class="col-12"><div class="form-check"><input class="form-check-input" type="checkbox" id="tomaMedicamentos"><label class="form-check-label" for="tomaMedicamentos">Faz uso de medicamentos?</label></div></div>
+                    <div class="col-12"><input type="text" class="form-control form-control-sm mt-1" id="medicamentosTexto" placeholder="Quais medicamentos?"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Uso de Lentes de Contato -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingLente">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLente" aria-expanded="false" aria-controls="collapseLente">
+                  <i class="bi bi-eye me-2"></i>Uso de Lentes de Contato
+                </button>
+              </h2>
+              <div id="collapseLente" class="accordion-collapse collapse" aria-labelledby="headingLente" data-bs-parent="#accordionAnamnese">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                    <div class="col-md-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="jaUsaLente"><label class="form-check-label" for="jaUsaLente">Já usa lente?</label></div></div>
+                    <div class="col-md-6"><input type="text" class="form-control form-control-sm" id="tempoUsoLente" placeholder="Há quanto tempo?"></div>
+                    <div class="col-md-6"><input type="text" class="form-control form-control-sm" id="marcaLente" placeholder="Marca/Modelo da Lente"></div>
+                    <div class="col-md-6">
+                      <label class="form-label small">Tipo de Lente</label>
+                      <select class="form-select form-select-sm" id="tipoLente">
+                        <option value="">Selecione</option>
+                        <option>Descartável Diária</option>
+                        <option>Descartável Quinzenal</option>
+                        <option>Descartável Mensal</option>
+                        <option>Convencional</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6"><input type="text" class="form-control form-control-sm" id="solucaoLente" placeholder="Solução de Limpeza Utilizada"></div>
+                    <div class="col-md-6"><input type="number" class="form-control form-control-sm" id="horasUsoLente" placeholder="Horas de uso por dia"></div>
+                    <div class="col-md-6">
+                      <label class="form-label small">Desconforto com Lentes?</label>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="desconfortoLente" id="desconfortoSim" value="sim"><label class="form-check-label" for="desconfortoSim">Sim</label></div>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="desconfortoLente" id="desconfortoNao" value="nao"><label class="form-check-label" for="desconfortoNao">Não</label></div>
+                      <input type="text" class="form-control form-control-sm mt-1" id="desconfortoLenteTexto" placeholder="Descreva o desconforto">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Histórico Visual Anterior -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingVisual">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVisual" aria-expanded="false" aria-controls="collapseVisual">
+                  <i class="bi bi-journal-text me-2"></i>Histórico Visual Anterior
+                </button>
+              </h2>
+              <div id="collapseVisual" class="accordion-collapse collapse" aria-labelledby="headingVisual" data-bs-parent="#accordionAnamnese">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label small">Data da Última Prescrição</label><input type="date" class="form-control form-control-sm" id="dataUltimaPrescricao"></div>
+                    <div class="col-md-6"><label class="form-label small">Observações</label><input type="text" class="form-control form-control-sm" id="obsUltimaPrescricao"></div>
+                    <div class="col-md-6"><label class="form-label small">OD (Esférico/Cil/Eixo)</label><input type="text" class="form-control form-control-sm" id="ultimaOD"></div>
+                    <div class="col-md-6"><label class="form-label small">OE (Esférico/Cil/Eixo)</label><input type="text" class="form-control form-control-sm" id="ultimaOE"></div>
+                    <div class="col-md-6">
+                      <label class="form-label small">Satisfação com Óculos/Lentes Atuais</label>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="satisfacaoAtual" id="satisfeito" value="satisfeito"><label class="form-check-label" for="satisfeito">Satisfeito(a)</label></div>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="satisfacaoAtual" id="insatisfeito" value="insatisfeito"><label class="form-check-label" for="insatisfeito">Insatisfeito(a)</label></div>
+                      <input type="text" class="form-control form-control-sm mt-1" id="motivoInsatisfacao" placeholder="Motivo da insatisfação">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label small">Atividades Visuais Diárias</label>
+                      <div class="form-check"><input class="form-check-input" type="checkbox" id="usoComputador"><label class="form-check-label" for="usoComputador">Uso de computador/celular</label></div>
+                      <input type="number" class="form-control form-control-sm mt-1" id="horasComputador" placeholder="Horas/dia">
+                      <div class="form-check"><input class="form-check-input" type="checkbox" id="leituraFrequente"><label class="form-check-label" for="leituraFrequente">Leitura frequente</label></div>
+                      <div class="form-check"><input class="form-check-input" type="checkbox" id="dirigeNoite"><label class="form-check-label" for="dirigeNoite">Dirige à noite</label></div>
+                      <div class="form-check"><input class="form-check-input" type="checkbox" id="praticaEsportes"><label class="form-check-label" for="praticaEsportes">Pratica esportes</label></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Dor de Cabeça -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingDorCabeca">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDorCabeca" aria-expanded="false" aria-controls="collapseDorCabeca">
+                  <i class="bi bi-emoji-dizzy me-2"></i>Dor de Cabeça
+                </button>
+              </h2>
+              <div id="collapseDorCabeca" class="accordion-collapse collapse" aria-labelledby="headingDorCabeca" data-bs-parent="#accordionAnamnese">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                    <div class="col-md-4"><input type="text" class="form-control form-control-sm" id="dorCabecaOnde" placeholder="Onde?"></div>
+                    <div class="col-md-4"><input type="text" class="form-control form-control-sm" id="dorCabecaPeriodo" placeholder="Período?"></div>
+                    <div class="col-md-4">
+                      <select class="form-select form-select-sm mb-1" id="freqDorCabeca"><option value="">Frequência</option><option>Rara</option><option>Semanal</option><option>Diária</option></select>
+                      <select class="form-select form-select-sm" id="intDorCabeca"><option value="">Intensidade</option><option>Leve</option><option>Moderada</option><option>Forte</option></select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Antecedentes Familiares -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFamilia">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFamilia" aria-expanded="false" aria-controls="collapseFamilia">
+                  <i class="bi bi-people me-2"></i>Antecedentes Familiares
+                </button>
+              </h2>
+              <div id="collapseFamilia" class="accordion-collapse collapse" aria-labelledby="headingFamilia" data-bs-parent="#accordionAnamnese">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="famGlaucoma"><label class="form-check-label" for="famGlaucoma">Glaucoma</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="famCatarata"><label class="form-check-label" for="famCatarata">Catarata</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="famDegeneracao"><label class="form-check-label" for="famDegeneracao">Degeneração Macular</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="famEstrabismo"><label class="form-check-label" for="famEstrabismo">Estrabismo</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="famAmbliopia"><label class="form-check-label" for="famAmbliopia">Ambliopia</label></div></div>
+                    <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="famOutros"><label class="form-check-label" for="famOutros">Outros</label></div></div>
+                    <div class="col-12"><input type="text" class="form-control form-control-sm mt-1" id="antecedentesFamiliares" placeholder="Descreva outros antecedentes familiares"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Diagnóstico e Plano de Ação -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingDiagnostico">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiagnostico" aria-expanded="false" aria-controls="collapseDiagnostico">
+                  <i class="bi bi-clipboard2-pulse me-2"></i>Diagnóstico e Plano de Ação
+                </button>
+              </h2>
+              <div id="collapseDiagnostico" class="accordion-collapse collapse" aria-labelledby="headingDiagnostico" data-bs-parent="#accordionAnamnese">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label small">Diagnóstico Principal</label><input type="text" class="form-control form-control-sm" id="diagnosticoPrincipal" placeholder="Diagnóstico principal"></div>
+                    <div class="col-md-6"><label class="form-label small">Diagnósticos Secundários</label><input type="text" class="form-control form-control-sm" id="diagnosticoSecundario" placeholder="Diagnósticos secundários"></div>
+                    <div class="col-md-12"><label class="form-label small">Orientação ao Paciente</label><textarea class="form-control form-control-sm" id="orientacaoPaciente" rows="2" placeholder="Orientações"></textarea></div>
+                    <div class="col-md-6"><label class="form-label small">Próxima Consulta Sugerida</label><input type="date" class="form-control form-control-sm" id="proximaConsulta"></div>
+                    <div class="col-md-6">
+                      <label class="form-label small">Necessidade de Retorno para Ajuste/Avaliação</label>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="retornoAjuste" id="retornoSim" value="sim"><label class="form-check-label" for="retornoSim">Sim</label></div>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="retornoAjuste" id="retornoNao" value="nao"><label class="form-check-label" for="retornoNao">Não</label></div>
+                      <input type="text" class="form-control form-control-sm mt-1" id="motivoRetorno" placeholder="Motivo do retorno">
+                    </div>
+                    <div class="col-md-12">
+                      <label class="form-label small">Encaminhamento para Especialista</label>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="encaminhamento" id="encaminhamentoSim" value="sim"><label class="form-check-label" for="encaminhamentoSim">Sim</label></div>
+                      <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="encaminhamento" id="encaminhamentoNao" value="nao"><label class="form-check-label" for="encaminhamentoNao">Não</label></div>
+                      <input type="text" class="form-control form-control-sm mt-1" id="especialistaEncaminhamento" placeholder="Especialista e motivo">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="medidas">
+          <!-- Campos de medidas oculares -->
+          <div class="mb-3">
+            <label class="form-label text-black">DNP (Distância Naso-Pupilar) <span class="text-danger">*</span></label>
+            <input type="number" class="form-control border-rosa text-black" id="dnp" placeholder="mm" required>
+            <div class="invalid-feedback">Preencha a DNP.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-black">ADI (Altura da Íris) <span class="text-danger">*</span></label>
+            <input type="number" class="form-control border-rosa text-black" id="adi" placeholder="mm" required>
+            <div class="invalid-feedback">Preencha a ADI.</div>
+          </div>
+          <div class="d-flex justify-content-between gap-2">
+            <button type="button" class="btn btn-outline-rosa" id="btnAnteriorMedidas">Anterior</button>
+            <button type="button" class="btn btn-rosa" id="btnProximoMedidas">Próximo</button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="lentes">
+          <!-- Campos de prescrição de lentes -->
+          <div class="mb-3">
+            <label class="form-label text-black">OD (Olho Direito) <span class="text-danger">*</span></label>
+            <input type="text" class="form-control border-rosa text-black" id="od" placeholder="Grau esférico" required>
+            <div class="invalid-feedback">Preencha o campo OD.</div>
+      </div>
+      <div class="mb-3">
+            <label class="form-label text-black">OS (Olho Esquerdo) <span class="text-danger">*</span></label>
+            <input type="text" class="form-control border-rosa text-black" id="os" placeholder="Grau esférico" required>
+            <div class="invalid-feedback">Preencha o campo OS.</div>
+          </div>
+          <!-- Campo Adição (aparece só para multifocal) -->
+          <div class="mb-3" id="campoAdicao" style="display:none;">
+            <label class="form-label text-black">Adição</label>
+            <input type="text" class="form-control border-rosa text-black" id="adicao" placeholder="Valor da adição (ex: +2.00)">
+          </div>
+          <div class="d-flex justify-content-between gap-2">
+            <button type="button" class="btn btn-outline-rosa" id="btnAnteriorLentes">Anterior</button>
+            <button type="button" class="btn btn-info text-white" id="btnAnalisar">Analisar Prescrição</button>
+            <button type="submit" class="btn btn-rosa">Salvar Receita</button>
+          </div>
+          <div id="sugestoesAssistente" class="mt-3"></div>
+      </div>
+      <div class="tab-pane fade" id="atestados" role="tabpanel">
+        <!-- Formulário de Atestados e Documentos -->
+        <div class="mb-3">
+          <label class="form-label text-black">Tipo de Documento <span class="text-danger">*</span></label>
+          <select class="form-select border-rosa text-black" id="tipoDocumento" required>
+            <option value="">Selecione o tipo de documento</option>
+            <option value="atestado">Atestado Médico</option>
+            <option value="declaracao">Declaração</option>
+            <option value="relatorio">Relatório Médico</option>
+            <option value="laudo">Laudo Oftalmológico</option>
+            <option value="prescricao">Prescrição Especial</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label text-black">Motivo/Justificativa <span class="text-danger">*</span></label>
+          <textarea class="form-control border-rosa text-black" id="motivoDocumento" rows="3" placeholder="Descreva o motivo ou justificativa do documento" required></textarea>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label text-black">Data de Início</label>
+            <input type="date" class="form-control border-rosa text-black" id="dataInicioDocumento">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-black">Data de Término</label>
+            <input type="date" class="form-control border-rosa text-black" id="dataTerminoDocumento">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label text-black">Restrições/Orientações</label>
+          <textarea class="form-control border-rosa text-black" id="restricoesDocumento" rows="2" placeholder="Restrições ou orientações específicas"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label text-black">Observações Adicionais</label>
+          <textarea class="form-control border-rosa text-black" id="observacoesDocumento" rows="2" placeholder="Observações complementares"></textarea>
+        </div>
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="documentoUrgente">
+            <label class="form-check-label" for="documentoUrgente">Documento Urgente</label>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between gap-2">
+          <button type="button" class="btn btn-outline-rosa" id="btnAnteriorAtestados">Anterior</button>
+          <button type="button" class="btn btn-success" id="btnGerarDocumento">
+            <i class="bi bi-file-earmark-text"></i> Gerar Documento
+          </button>
+        </div>
+        <!-- Preview do Documento -->
+        <div class="mt-4">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h6 class="mb-0"><i class="bi bi-eye"></i> Preview do Documento</h6>
+            </div>
+            <div class="card-body" id="previewDocumento">
+              <div class="text-center text-muted">
+                <i class="bi bi-file-earmark-text fs-1"></i>
+                <p class="mt-2">Selecione o tipo de documento e preencha os campos para visualizar o preview</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  <!-- Painel de Visualização -->
+  <div class="col-lg-4">
+    <div class="sticky-top" style="top: 20px;">
+      <div class="card shadow-lg h-100 mb-4">
+        <div class="card-header bg-light">
+          <div class="d-flex justify-content-between">
+            <span>Pré-visualização</span>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="modoComparacao">
+              <label class="form-check-label" for="modoComparacao">Comparar</label>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Visualização 3D/PDF -->
+          <div id="previewReceita" class="w-100 h-100 bg-white rounded shadow p-3" style="min-height: 200px; color: var(--color1);">
+            <div class="mb-2"><span class="fw-bold">Paciente:</span> <span id="previewNome">—</span></div>
+            <div class="mb-2"><span class="fw-bold">Tipo:</span> <span id="previewTipo">—</span></div>
+            <div class="mb-2"><span class="fw-bold">OD:</span> <span id="previewOD">—</span> &nbsp; <span class="fw-bold">OS:</span> <span id="previewOS">—</span></div>
+            <div class="mb-2" id="previewAdicaoBox" style="display:none;"><span class="fw-bold">Adição:</span> <span id="previewAdicao">—</span></div>
+            <div class="mb-2"><span class="fw-bold">DNP:</span> <span id="previewDNP">—</span> &nbsp; <span class="fw-bold">ADI:</span> <span id="previewADI">—</span></div>
+            <div class="mb-2"><span class="fw-bold">CID-10:</span> <span id="previewCID">—</span></div>
+            <div class="mb-2"><span class="fw-bold">Motivo:</span> <span id="previewMotivo">—</span></div>
+            <div class="mb-2"><span class="fw-bold">Anamnese:</span> <span id="previewAnamnese">—</span></div>
+            <div class="mb-2"><span class="fw-bold">Observações:</span> <span id="previewObs">—</span></div>
+          </div>
+        </div>
+        <div class="card-footer bg-light">
+          <button class="btn btn-rosa w-100 mb-2">
+            <i class="bi bi-send"></i> Enviar para Laboratório
+          </button>
+          <button class="btn btn-outline-rosa w-100" id="btnExportarPDF">
+            <i class="bi bi-file-earmark-pdf"></i> Exportar PDF
+          </button>
+        </div>
+      </div>
+      <!-- Histórico lateral (timeline do paciente) -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light fw-bold"><i class="bi bi-clock-history me-1"></i> Histórico de Receitas</div>
+        <div class="card-body p-2" style="max-height: 260px; overflow-y: auto;">
+          <ul class="list-group list-group-flush small" id="timelineReceitas">
+            <!-- Itens do histórico serão inseridos via JS -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// Validação e navegação assistida
+function validarDados() {
+  let valido = true;
+  const nome = document.getElementById('nomePaciente');
+  const data = document.getElementById('dataNascimento');
+  if (!nome.value) { nome.classList.add('is-invalid'); valido = false; } else { nome.classList.remove('is-invalid'); }
+  if (!data.value) { data.classList.add('is-invalid'); valido = false; } else { data.classList.remove('is-invalid'); }
+  return valido;
+}
+function validarMedidas() {
+  let valido = true;
+  const dnp = document.getElementById('dnp');
+  const adi = document.getElementById('adi');
+  if (!dnp.value) { dnp.classList.add('is-invalid'); valido = false; } else { dnp.classList.remove('is-invalid'); }
+  if (!adi.value) { adi.classList.add('is-invalid'); valido = false; } else { adi.classList.remove('is-invalid'); }
+  return valido;
+}
+function validarLentes() {
+  let valido = true;
+  const od = document.getElementById('od');
+  const os = document.getElementById('os');
+  if (!od.value) { od.classList.add('is-invalid'); valido = false; } else { od.classList.remove('is-invalid'); }
+  if (!os.value) { os.classList.add('is-invalid'); valido = false; } else { os.classList.remove('is-invalid'); }
+  return valido;
+}
+// Templates dinâmicos
+const templates = {
+  miopia: {
+    nomePaciente: '',
+    dataNascimento: '',
+    dnp: 32,
+    adi: 18,
+    od: '-2.00',
+    os: '-1.75'
+  },
+  progressiva: {
+    nomePaciente: '',
+    dataNascimento: '',
+    dnp: 30,
+    adi: 20,
+    od: '-1.50 / +2.00',
+    os: '-1.25 / +2.25'
+  }
+};
+function aplicarTemplate(tipo) {
+  const t = templates[tipo];
+  if (!t) return;
+  document.getElementById('dnp').value = t.dnp;
+  document.getElementById('adi').value = t.adi;
+  document.getElementById('od').value = t.od;
+  document.getElementById('os').value = t.os;
+}
+function atualizarPreview() {
+  document.getElementById('previewNome').textContent = document.getElementById('nomePaciente').value || '—';
+  const tipo = document.getElementById('tipoReceita').selectedOptions[0].textContent;
+  document.getElementById('previewTipo').textContent = tipo || '—';
+  document.getElementById('previewOD').textContent = document.getElementById('od').value || '—';
+  document.getElementById('previewOS').textContent = document.getElementById('os').value || '—';
+  document.getElementById('previewDNP').textContent = document.getElementById('dnp').value || '—';
+  document.getElementById('previewADI').textContent = document.getElementById('adi').value || '—';
+  document.getElementById('previewCID').textContent = document.getElementById('cid10').value || '—';
+  document.getElementById('previewMotivo').textContent = document.getElementById('motivoConsulta').value || '—';
+  document.getElementById('previewAnamnese').textContent = document.getElementById('anamnese').value || '—';
+  document.getElementById('previewObs').textContent = document.getElementById('observacoes').value || '—';
+  // Adição
+  if (document.getElementById('tipoReceita').value === 'multifocal') {
+    document.getElementById('previewAdicaoBox').style.display = '';
+    document.getElementById('previewAdicao').textContent = document.getElementById('adicao').value || '—';
+  } else {
+    document.getElementById('previewAdicaoBox').style.display = 'none';
+    document.getElementById('previewAdicao').textContent = '—';
+  }
+}
+// Timeline de receitas (dados simulados)
+const receitasSimuladas = [
+  {data: '15/07/2024', tipo: 'Multifocal', status: 'Assinada', id: 1},
+  {data: '10/06/2024', tipo: 'Simples', status: 'Entregue', id: 2},
+  {data: '22/04/2024', tipo: 'Solar', status: 'Rascunho', id: 3}
+];
+function renderizarTimeline() {
+  const ul = document.getElementById('timelineReceitas');
+  ul.innerHTML = '';
+  receitasSimuladas.forEach(r => {
+    let badge = 'secondary';
+    if (r.status === 'Assinada') badge = 'success';
+    if (r.status === 'Entregue') badge = 'primary';
+    if (r.status === 'Rascunho') badge = 'warning';
+    ul.innerHTML += `<li class='list-group-item d-flex justify-content-between align-items-center'>
+      <div>
+        <span class='fw-semibold'>${r.data}</span> <span class='text-muted'>${r.tipo}</span>
+      </div>
+      <div>
+        <span class='badge bg-${badge} me-2'>${r.status}</span>
+        <button class='btn btn-link btn-sm text-color1' title='Ver'><i class='bi bi-eye'></i></button>
+        <button class='btn btn-link btn-sm text-color1' title='Editar'><i class='bi bi-pencil'></i></button>
+        <button class='btn btn-link btn-sm text-success' title='PDF'><i class='bi bi-file-earmark-pdf'></i></button>
+      </div>
+    </li>`;
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  // Navegação entre abas
+  document.getElementById('btnProximoDados').onclick = function() {
+    if (validarDados()) {
+      new bootstrap.Tab(document.querySelector('a[href="#medidas"]')).show();
+    }
+  };
+  document.getElementById('btnAnteriorMedidas').onclick = function() {
+    new bootstrap.Tab(document.querySelector('a[href="#dados"]')).show();
+  };
+  document.getElementById('btnProximoMedidas').onclick = function() {
+    if (validarMedidas()) {
+      new bootstrap.Tab(document.querySelector('a[href="#lentes"]')).show();
+    }
+  };
+  document.getElementById('btnAnteriorLentes').onclick = function() {
+    new bootstrap.Tab(document.querySelector('a[href="#medidas"]')).show();
+  };
+  // Navegação para aba de Atestados
+  document.getElementById('btnAnteriorAtestados').onclick = function() {
+    new bootstrap.Tab(document.querySelector('a[href="#lentes"]')).show();
+  };
+  // Validação final ao salvar
+  document.getElementById('form-receita').onsubmit = function(e) {
+    if (!validarLentes()) {
+      e.preventDefault();
+    }
+  };
+  // Event listeners para preview do documento
+  ['tipoDocumento', 'motivoDocumento', 'dataInicioDocumento', 'dataTerminoDocumento', 'restricoesDocumento', 'observacoesDocumento', 'documentoUrgente'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', atualizarPreviewDocumento);
+      el.addEventListener('change', atualizarPreviewDocumento);
+    }
+  });
+  // Seleção de template
+  document.querySelectorAll('.dropdown-item[data-template]').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      aplicarTemplate(this.dataset.template);
+    });
+  });
+  // Assistente de Prescrição
+  document.getElementById('btnAnalisar').onclick = function() {
+    let sugestoes = [];
+    const idade = document.getElementById('dataNascimento').value ? new Date().getFullYear() - new Date(document.getElementById('dataNascimento').value).getFullYear() : null;
+    const od = document.getElementById('od').value;
+    const os = document.getElementById('os').value;
+    if (idade && idade < 10 && (parseFloat(od) < -6 || parseFloat(os) < -6)) {
+      sugestoes.push('Atenção: Grau elevado para idade inferior a 10 anos. Confirme a prescrição.');
+    }
+    if (od === os && od !== '' && os !== '') {
+      sugestoes.push('OD e OS possuem o mesmo grau. Confirme se não é um erro de digitação.');
+    }
+    if (!idade || isNaN(idade)) {
+      sugestoes.push('Preencha a data de nascimento para análises mais precisas.');
+    }
+    if (sugestoes.length === 0) {
+      sugestoes.push('Nenhuma inconsistência detectada. Prescrição parece adequada.');
+    }
+    document.getElementById('sugestoesAssistente').innerHTML = sugestoes.map(s => `<div class='alert alert-warning mb-2 py-2 px-3'>${s}</div>`).join('');
+  };
+  // Exibição dinâmica do campo Adição
+  document.getElementById('tipoReceita').addEventListener('change', function() {
+    const campoAdicao = document.getElementById('campoAdicao');
+    if (this.value === 'multifocal') {
+      campoAdicao.style.display = '';
+    } else {
+      campoAdicao.style.display = 'none';
+      document.getElementById('adicao').value = '';
+    }
+  });
+  // Inicialização do campo Adição
+  if (document.getElementById('tipoReceita').value === 'multifocal') {
+    document.getElementById('campoAdicao').style.display = '';
+  }
+  // Preview ao vivo
+  [
+    'nomePaciente','tipoReceita','od','os','dnp','adi','cid10','motivoConsulta','anamnese','observacoes','adicao'
+  ].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', atualizarPreview);
+      el.addEventListener('change', atualizarPreview);
+    }
+  });
+  // Integrar nome do paciente no preview do documento
+  function atualizarPreviewDocumento() {
+    const tipo = document.getElementById('tipoDocumento').value;
+    const motivo = document.getElementById('motivoDocumento').value;
+    const dataInicio = document.getElementById('dataInicioDocumento').value;
+    const dataTermino = document.getElementById('dataTerminoDocumento').value;
+    const restricoes = document.getElementById('restricoesDocumento').value;
+    const observacoes = document.getElementById('observacoesDocumento').value;
+    const urgente = document.getElementById('documentoUrgente').checked;
+    const nomePaciente = document.getElementById('pacienteBusca').value || '—';
+    
+    const preview = document.getElementById('previewDocumento');
+    
+    if (!tipo || !motivo) {
+      preview.innerHTML = `
+        <div class="text-center text-muted">
+          <i class="bi bi-file-earmark-text fs-1"></i>
+          <p class="mt-2">Selecione o tipo de documento e preencha os campos obrigatórios</p>
+        </div>
+      `;
+      return;
+    }
+    
+    const tipoText = document.getElementById('tipoDocumento').selectedOptions[0].textContent;
+    const dataAtual = new Date().toLocaleDateString('pt-BR');
+    
+    preview.innerHTML = `
+      <div class="border p-3 bg-white">
+        <div class="text-center mb-3">
+          <h5 class="fw-bold">${tipoText.toUpperCase()}</h5>
+          <small class="text-muted">Data: ${dataAtual}</small>
+        </div>
+        <div class="mb-3">
+          <strong>Paciente:</strong> ${nomePaciente}
+        </div>
+        <div class="mb-3">
+          <strong>Motivo:</strong> ${motivo}
+        </div>
+        ${dataInicio ? `<div class="mb-2"><strong>Data de Início:</strong> ${new Date(dataInicio).toLocaleDateString('pt-BR')}</div>` : ''}
+        ${dataTermino ? `<div class="mb-2"><strong>Data de Término:</strong> ${new Date(dataTermino).toLocaleDateString('pt-BR')}</div>` : ''}
+        ${restricoes ? `<div class="mb-2"><strong>Restrições/Orientações:</strong> ${restricoes}</div>` : ''}
+        ${observacoes ? `<div class="mb-2"><strong>Observações:</strong> ${observacoes}</div>` : ''}
+        ${urgente ? '<div class="alert alert-warning py-1 mb-2"><strong>⚠️ DOCUMENTO URGENTE</strong></div>' : ''}
+        <div class="text-center mt-4">
+          <small class="text-muted">Assinado digitalmente por Dr(a). [Nome do Profissional]</small>
+        </div>
+      </div>
+    `;
+  }
+  // Geração do documento
+  document.getElementById('btnGerarDocumento').onclick = function() {
+    const tipo = document.getElementById('tipoDocumento').value;
+    const motivo = document.getElementById('motivoDocumento').value;
+    
+    if (!tipo || !motivo) {
+      alert('Preencha os campos obrigatórios (Tipo de Documento e Motivo)');
+      return;
+    }
+    
+    // Aqui você pode implementar a geração real do PDF
+    alert('Documento gerado com sucesso!');
+  };
+  atualizarPreview(); // inicializa preview
+  renderizarTimeline();
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+document.getElementById('btnExportarPDF').onclick = function() {
+  const preview = document.getElementById('previewReceita');
+  const opt = {
+    margin:       0.5,
+    filename:     'receita-visare.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'cm', format: 'a4', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(preview).save();
+};
+</script>
+{% endblock %} 

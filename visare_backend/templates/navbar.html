@@ -1,0 +1,22 @@
+{% load static %}
+<header class="bg-white shadow-sm d-flex align-items-center justify-content-between px-4 py-3">
+  <span class="fw-bold text-black">Nome da Clínica</span>
+  <div class="d-flex align-items-center gap-3">
+    <button class="btn position-relative">
+      <i class="bi bi-bell text-color1"></i>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-color1">3</span>
+    </button>
+    <div class="d-flex align-items-center gap-2">
+      <img src="{% static 'avatar.png' %}" alt="Avatar" class="rounded-circle" style="height: 32px; width: 32px;">
+      <span class="text-black">Usuário</span>
+      <div class="dropdown">
+        <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown">▼</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Perfil</a></li>
+          <li><a class="dropdown-item" href="#">Trocar senha</a></li>
+          <li><a class="dropdown-item" href="#">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header> 

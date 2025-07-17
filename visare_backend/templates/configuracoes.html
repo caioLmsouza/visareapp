@@ -1,0 +1,404 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <h1 class="text-2xl fw-bold text-black mb-0">Configurações</h1>
+  <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow ms-auto"><i class="bi bi-save me-1"></i> Salvar Alterações</button>
+</div>
+
+<!-- Tabs de Configurações -->
+<ul class="nav nav-tabs mb-4" id="configTabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="geral-tab" data-bs-toggle="tab" data-bs-target="#geral" type="button" role="tab">
+      <i class="bi bi-gear me-1"></i>Geral
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" type="button" role="tab">
+      <i class="bi bi-people me-1"></i>Usuários
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="clinicas-tab" data-bs-toggle="tab" data-bs-target="#clinicas" type="button" role="tab">
+      <i class="bi bi-hospital me-1"></i>Clínicas
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="backup-tab" data-bs-toggle="tab" data-bs-target="#backup" type="button" role="tab">
+      <i class="bi bi-cloud-arrow-up me-1"></i>Backup
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="seguranca-tab" data-bs-toggle="tab" data-bs-target="#seguranca" type="button" role="tab">
+      <i class="bi bi-shield-lock me-1"></i>Segurança
+    </button>
+  </li>
+</ul>
+
+<div class="tab-content" id="configTabsContent">
+  <!-- Configurações Gerais -->
+  <div class="tab-pane fade show active" id="geral" role="tabpanel">
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Configurações do Sistema</h6>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nome do Sistema</label>
+                <input type="text" class="form-control" value="VisareApp" placeholder="Nome do sistema">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Versão</label>
+                <input type="text" class="form-control" value="1.0.0" readonly>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Fuso Horário</label>
+                <select class="form-select">
+                  <option value="America/Sao_Paulo" selected>America/Sao_Paulo (UTC-3)</option>
+                  <option value="America/Manaus">America/Manaus (UTC-4)</option>
+                  <option value="America/Belem">America/Belem (UTC-3)</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Idioma</label>
+                <select class="form-select">
+                  <option value="pt-br" selected>Português (Brasil)</option>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Descrição do Sistema</label>
+                <textarea class="form-control" rows="3" placeholder="Descrição do sistema">Sistema de gestão para clínicas oftalmológicas</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Informações do Sistema</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <small class="text-muted">Última Atualização</small>
+              <div class="fw-semibold">16/07/2025 20:25</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Status do Sistema</small>
+              <div class="badge bg-success">Online</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Espaço em Disco</small>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-success" style="width: 25%"></div>
+              </div>
+              <small class="text-muted">2.5 GB de 10 GB</small>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Memória RAM</small>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-warning" style="width: 60%"></div>
+              </div>
+              <small class="text-muted">1.2 GB de 2 GB</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configurações de Usuários -->
+  <div class="tab-pane fade" id="usuarios" role="tabpanel">
+    <div class="card shadow-sm rounded">
+      <div class="card-header bg-light d-flex justify-content-between align-items-center">
+        <h6 class="mb-0 fw-bold text-black">Gerenciar Usuários</h6>
+        <button class="btn btn-rosa btn-sm"><i class="bi bi-person-plus"></i> Novo Usuário</button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped align-middle">
+            <thead class="bg-color4 text-black text-uppercase text-xs tracking-wide">
+              <tr>
+                <th>Usuário</th>
+                <th>E-mail</th>
+                <th>Função</th>
+                <th>Status</th>
+                <th>Último Acesso</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-semibold text-black">Admin</td>
+                <td class="text-black">admin@visare.com</td>
+                <td><span class="badge bg-danger">Administrador</span></td>
+                <td><span class="badge bg-success">Ativo</span></td>
+                <td class="text-black">16/07/2025 20:25</td>
+                <td class="text-center">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-link text-color1 p-1" title="Editar"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-link text-danger p-1" title="Excluir"><i class="bi bi-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-semibold text-black">Dra. Ana</td>
+                <td class="text-black">ana@visare.com</td>
+                <td><span class="badge bg-primary">Médico</span></td>
+                <td><span class="badge bg-success">Ativo</span></td>
+                <td class="text-black">16/07/2025 18:30</td>
+                <td class="text-center">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-link text-color1 p-1" title="Editar"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-link text-danger p-1" title="Excluir"><i class="bi bi-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configurações de Clínicas -->
+  <div class="tab-pane fade" id="clinicas" role="tabpanel">
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Configurações de Clínicas</h6>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Clínica Padrão</label>
+                <select class="form-select">
+                  <option>Clínica A</option>
+                  <option>Clínica B</option>
+                  <option>Clínica C</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Horário de Funcionamento</label>
+                <input type="text" class="form-control" value="08:00 - 18:00" placeholder="Horário de funcionamento">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Configurações de Agendamento</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="agendamentoOnline" checked>
+                  <label class="form-check-label" for="agendamentoOnline">Permitir agendamento online</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="confirmacaoAutomatica">
+                  <label class="form-check-label" for="confirmacaoAutomatica">Confirmação automática de consultas</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="lembreteConsultas" checked>
+                  <label class="form-check-label" for="lembreteConsultas">Enviar lembretes de consultas</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Estatísticas</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <small class="text-muted">Total de Clínicas</small>
+              <div class="fs-4 fw-bold text-color1">3</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Clínicas Ativas</small>
+              <div class="fs-4 fw-bold text-success">3</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Total de Pacientes</small>
+              <div class="fs-4 fw-bold text-info">1,247</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configurações de Backup -->
+  <div class="tab-pane fade" id="backup" role="tabpanel">
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Configurações de Backup</h6>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Frequência de Backup</label>
+                <select class="form-select">
+                  <option value="diario" selected>Diário</option>
+                  <option value="semanal">Semanal</option>
+                  <option value="mensal">Mensal</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Horário do Backup</label>
+                <input type="time" class="form-control" value="02:00">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Retenção de Backups</label>
+                <select class="form-select">
+                  <option value="7">7 dias</option>
+                  <option value="30" selected>30 dias</option>
+                  <option value="90">90 dias</option>
+                  <option value="365">1 ano</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="backupAutomatico" checked>
+                  <label class="form-check-label" for="backupAutomatico">Backup automático</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="backupCloud" checked>
+                  <label class="form-check-label" for="backupCloud">Backup na nuvem</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notificacaoBackup">
+                  <label class="form-check-label" for="notificacaoBackup">Notificar sobre falhas de backup</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Status do Backup</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <small class="text-muted">Último Backup</small>
+              <div class="fw-semibold text-success">16/07/2025 02:00</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Próximo Backup</small>
+              <div class="fw-semibold">17/07/2025 02:00</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Tamanho do Backup</small>
+              <div class="fw-semibold">45.2 MB</div>
+            </div>
+            <button class="btn btn-outline-rosa w-100 mb-2">
+              <i class="bi bi-cloud-arrow-down"></i> Fazer Backup Manual
+            </button>
+            <button class="btn btn-outline-secondary w-100">
+              <i class="bi bi-cloud-arrow-up"></i> Restaurar Backup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configurações de Segurança -->
+  <div class="tab-pane fade" id="seguranca" role="tabpanel">
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Configurações de Segurança</h6>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Tempo de Sessão (minutos)</label>
+                <input type="number" class="form-control" value="30" min="5" max="480">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tentativas de Login</label>
+                <input type="number" class="form-control" value="3" min="1" max="10">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Política de Senhas</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="senhaComplexa" checked>
+                  <label class="form-check-label" for="senhaComplexa">Exigir senha complexa</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="trocaSenha" checked>
+                  <label class="form-check-label" for="trocaSenha">Forçar troca de senha a cada 90 dias</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="doisFatores">
+                  <label class="form-check-label" for="doisFatores">Autenticação de dois fatores</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Logs de Segurança</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="logAcessos" checked>
+                  <label class="form-check-label" for="logAcessos">Registrar tentativas de acesso</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="logAlteracoes" checked>
+                  <label class="form-check-label" for="logAlteracoes">Registrar alterações críticas</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm rounded">
+          <div class="card-header bg-light">
+            <h6 class="mb-0 fw-bold text-black">Status de Segurança</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <small class="text-muted">Último Login</small>
+              <div class="fw-semibold">16/07/2025 20:25</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">IP de Acesso</small>
+              <div class="fw-semibold">192.168.1.100</div>
+            </div>
+            <div class="mb-3">
+              <small class="text-muted">Nível de Segurança</small>
+              <div class="badge bg-success">Alto</div>
+            </div>
+            <button class="btn btn-outline-warning w-100">
+              <i class="bi bi-shield-exclamation"></i> Verificar Segurança
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Salvar configurações
+  document.querySelector('.btn-rosa').addEventListener('click', function() {
+    alert('Configurações salvas com sucesso!');
+  });
+  
+  // Controle de tabs
+  document.querySelectorAll('[data-bs-toggle="tab"]').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      // Aqui você pode adicionar lógica adicional quando trocar de tab
+    });
+  });
+});
+</script>
+{% endblock %} 

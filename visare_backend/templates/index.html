@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisareApp - Sistema Completo para Optometristas</title>
+    <meta name="description" content="Transforme sua prática optométrica com o VisareApp. Sistema completo para gestão de pacientes, receitas digitais e fichas clínicas avançadas.">
+    <meta name="keywords" content="sistema optométrico, gestão de pacientes, receitas digitais, agendamento online, fichas clínicas, optometrista">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Tailwind CSS -->
+    <!-- Para produção, instale o Tailwind CSS como plugin PostCSS ou use o CLI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👁️</text></svg>">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="VisareApp - Sistema Completo para Optometristas">
+    <meta property="og:description" content="Transforme sua prática optométrica com o VisareApp. Sistema completo para gestão de pacientes, receitas digitais e fichas clínicas avançadas.">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630' style='background:%23667eea'><text x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='60' font-family='Arial'>VisareApp</text></svg>">
+    <meta property="og:url" content="https://visareapp.com">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VisareApp - Sistema Completo para Optometristas">
+    <meta name="twitter:description" content="Transforme sua prática optométrica com o VisareApp. Sistema completo para gestão de pacientes, receitas digitais e fichas clínicas avançadas.">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(102, 126, 234, 0.95); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-eye me-2"></i>VisareApp
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Depoimentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Planos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-warning btn-sm ms-2" href="/login">Entrar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+<section class="hero-section position-relative overflow-hidden" style="min-height: 90vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <!-- Animated Background -->
+  <div class="position-absolute w-100 h-100" style="top: 0; left: 0; z-index: 1;">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
+  
+  <!-- Glassmorphism Container -->
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row align-items-center" style="min-height: 90vh;">
+      <div class="col-lg-6">
+        <div class="glass-card p-4 rounded-4 shadow-lg" style="backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
+          <!-- Badge de Autoridade -->
+          <div class="d-inline-block mb-3">
+            <span class="badge bg-white bg-opacity-20 text-white px-3 py-2 rounded-pill">
+              <i class="bi bi-award me-2"></i>#1 Sistema para Optometristas
+            </span>
+          </div>
+          
+          <!-- Headline Principal -->
+          <h1 class="display-5 fw-bold text-white mb-3" style="line-height: 1.2;">
+            Atendendo em múltiplas clínicas?
+            <span class="text-warning">Padronize seus processos</span> com o sistema completo
+          </h1>
+          
+          <!-- Subheadline -->
+          <p class="lead text-white-50 mb-3" style="font-size: 1.1rem;">
+            O VisareApp é a solução definitiva para optometristas que querem 
+            <strong class="text-white">otimizar tempo</strong>, 
+            <strong class="text-white">padronizar receitas</strong> e 
+            <strong class="text-white">acessar prontuários de qualquer lugar</strong>.
+          </p>
+          
+          <!-- Prova Social Compacta -->
+          <div class="d-flex align-items-center mb-3 text-white">
+            <div class="me-3">
+              <div class="h4 fw-bold mb-0">500+</div>
+              <small>Optometristas</small>
+            </div>
+            <div class="me-3">
+              <div class="h4 fw-bold mb-0">50k+</div>
+              <small>Pacientes</small>
+            </div>
+            <div>
+              <div class="h4 fw-bold mb-0">98%</div>
+              <small>Satisfação</small>
+            </div>
+          </div>
+          
+          <!-- CTA Buttons -->
+          <div class="d-flex flex-wrap gap-3 mb-3">
+            <button class="btn btn-warning btn-lg px-4 py-2 fw-bold shadow-lg" id="ctaDemo">
+              <i class="bi bi-play-circle me-2"></i>Ver Demo Gratuito
+            </button>
+            <button class="btn btn-outline-light btn-lg px-4 py-2 fw-bold" id="ctaPlanos">
+              <i class="bi bi-arrow-right me-2"></i>Ver Planos
+            </button>
+          </div>
+          
+          <!-- Trust Indicators -->
+          <div class="d-flex align-items-center text-white-50">
+            <i class="bi bi-shield-check me-2"></i>
+            <small>Teste grátis por 14 dias • Sem cartão de crédito • Suporte 24/7</small>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Hero Visual Compacto -->
+      <div class="col-lg-6">
+        <div class="position-relative">
+          <!-- Main Device Mockup -->
+          <div class="device-mockup" id="heroDevice">
+            <div class="device-screen">
+              <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 500' style='background:%23667eea'><text x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='24' font-family='Arial'>VisareApp Interface</text></svg>" alt="VisareApp Interface" class="img-fluid rounded">
+            </div>
+          </div>
+          
+          <!-- Floating Elements Compactos -->
+          <div class="floating-card card-1">
+            <div class="card bg-white shadow-lg rounded-3 p-2">
+              <div class="d-flex align-items-center">
+                <div class="bg-success rounded-circle p-1 me-2">
+                  <i class="bi bi-check text-white small"></i>
+                </div>
+                <div>
+                  <div class="fw-bold small">Consulta Agendada</div>
+                  <small class="text-muted">Maria Silva - 15:30</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="floating-card card-2">
+            <div class="card bg-white shadow-lg rounded-3 p-2">
+              <div class="d-flex align-items-center">
+                <div class="bg-primary rounded-circle p-1 me-2">
+                  <i class="bi bi-receipt text-white small"></i>
+                </div>
+                <div>
+                  <div class="fw-bold small">Receita Emitida</div>
+                  <small class="text-muted">João Santos</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5 bg-light" style="display: block !important; visibility: visible !important; opacity: 1 !important;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-12 text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">Por que escolher o VisareApp?</h2>
+        <p class="lead text-muted mb-0">Tudo que você precisa para sua prática oftalmológica em uma única plataforma</p>
+        <div class="mt-4">
+          <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill">
+            <i class="bi bi-star-fill me-2"></i>Sistema Completo
+          </span>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="feature-card h-100 p-4 rounded-4 shadow-sm border-0 bg-white position-relative" data-aos="fade-up" data-aos-delay="100" style="border-top: 4px solid #667eea;">
+          <div class="feature-icon mb-4">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-block">
+              <i class="bi bi-calendar-check text-primary fs-1"></i>
+            </div>
+          </div>
+          <h4 class="fw-bold mb-3">Gestão de Consultas</h4>
+          <p class="text-muted">Agende, cancele e gerencie consultas com facilidade. Sistema de lembretes automáticos e confirmações.</p>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Agendamento online</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Lembretes automáticos</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Histórico completo</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="feature-card h-100 p-4 rounded-4 shadow-sm border-0 bg-white position-relative" data-aos="fade-up" data-aos-delay="200" style="border-top: 4px solid #28a745;">
+          <div class="feature-icon mb-4">
+            <div class="bg-success bg-opacity-10 rounded-circle p-3 d-inline-block">
+              <i class="bi bi-file-earmark-medical text-success fs-1"></i>
+            </div>
+          </div>
+          <h4 class="fw-bold mb-3">Receitas Digitais</h4>
+          <p class="text-muted">Emita receitas profissionais com templates personalizáveis. Assinatura digital e envio automático.</p>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Templates personalizáveis</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Assinatura digital</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Exportação em PDF</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="feature-card h-100 p-4 rounded-4 shadow-sm border-0 bg-white position-relative" data-aos="fade-up" data-aos-delay="300" style="border-top: 4px solid #ffc107;">
+          <div class="feature-icon mb-4">
+            <div class="bg-warning bg-opacity-10 rounded-circle p-3 d-inline-block">
+              <i class="bi bi-graph-up text-warning fs-1"></i>
+            </div>
+          </div>
+          <h4 class="fw-bold mb-3">Relatórios Avançados</h4>
+          <p class="text-muted">Acompanhe o desempenho da sua prática com relatórios detalhados e dashboards interativos.</p>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Dashboards em tempo real</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Relatórios personalizados</li>
+            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Exportação de dados</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Proof Section -->
+<section id="testimonials" class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h2 class="display-6 fw-bold text-dark mb-4">Aprovado por centenas de optometristas</h2>
+        <p class="lead text-muted mb-4">Junte-se aos profissionais que já transformaram suas práticas com o VisareApp</p>
+        
+        <!-- Testimonials Carousel -->
+        <div class="testimonial-carousel">
+          <div class="testimonial-item">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="bg-primary rounded-circle p-2 me-3">
+                    <i class="bi bi-person text-white"></i>
+                  </div>
+                                  <div>
+                  <div class="fw-bold">Dra. Ana Silva</div>
+                  <small class="text-muted">Optometrista - São Paulo</small>
+                </div>
+              </div>
+              <p class="mb-0">"O VisareApp revolucionou minha prática. Agora consigo atender em múltiplas clínicas com total padronização e eficiência."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <div class="col-6">
+            <div class="text-center p-4">
+              <div class="h1 fw-bold text-primary mb-2">500+</div>
+              <div class="text-muted">Optometristas</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-center p-4">
+              <div class="h1 fw-bold text-success mb-2">50k+</div>
+              <div class="text-muted">Pacientes Cadastrados</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-center p-4">
+              <div class="h1 fw-bold text-warning mb-2">98%</div>
+              <div class="text-muted">Satisfação</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-center p-4">
+              <div class="h1 fw-bold text-info mb-2">24/7</div>
+              <div class="text-muted">Suporte</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">Como Funciona</h2>
+        <p class="lead text-muted">Em apenas 3 passos simples, sua prática estará funcionando com o VisareApp</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="step-number mb-4">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+              <span class="h2 fw-bold mb-0">1</span>
+            </div>
+          </div>
+          <h4 class="fw-bold mb-3">Cadastre sua Prática</h4>
+          <p class="text-muted">Crie sua conta gratuita e configure seus dados em poucos minutos.</p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="step-number mb-4">
+            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+              <span class="h2 fw-bold mb-0">2</span>
+            </div>
+          </div>
+          <h4 class="fw-bold mb-3">Importe seus Dados</h4>
+          <p class="text-muted">Migre seus pacientes e histórico de forma segura e automatizada.</p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="step-number mb-4">
+            <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+              <span class="h2 fw-bold mb-0">3</span>
+            </div>
+          </div>
+          <h4 class="fw-bold mb-3">Comece a Usar</h4>
+          <p class="text-muted">Aproveite todos os recursos e aumente sua produtividade.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">Benefícios Reais</h2>
+        <p class="lead text-muted">Descubra como o VisareApp pode transformar sua prática</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="benefit-card d-flex align-items-start p-4 rounded-4 shadow-sm border-0 bg-white" data-aos="fade-right" data-aos-delay="100">
+          <div class="benefit-icon me-4">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+              <i class="bi bi-graph-up-arrow text-primary fs-1"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="fw-bold mb-2">Aumento de 40% na Produtividade</h5>
+            <p class="text-muted mb-0">Optometristas que usam o VisareApp reportam aumento significativo na produtividade em apenas 3 meses.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="benefit-card d-flex align-items-start p-4 rounded-4 shadow-sm border-0 bg-white" data-aos="fade-left" data-aos-delay="200">
+          <div class="benefit-icon me-4">
+            <div class="bg-success bg-opacity-10 rounded-circle p-3">
+              <i class="bi bi-clock text-success fs-1"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="fw-bold mb-2">Economia de 15h por Semana</h5>
+            <p class="text-muted mb-0">Automatize tarefas repetitivas e foque no que realmente importa: seus pacientes.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="benefit-card d-flex align-items-start p-4 rounded-4 shadow-sm border-0 bg-white" data-aos="fade-right" data-aos-delay="300">
+          <div class="benefit-icon me-4">
+            <div class="bg-warning bg-opacity-10 rounded-circle p-3">
+              <i class="bi bi-heart text-warning fs-1"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="fw-bold mb-2">Satisfação do Paciente +60%</h5>
+            <p class="text-muted mb-0">Melhore a experiência do paciente com agendamento online e comunicação automatizada.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="benefit-card d-flex align-items-start p-4 rounded-4 shadow-sm border-0 bg-white" data-aos="fade-left" data-aos-delay="400">
+          <div class="benefit-icon me-4">
+            <div class="bg-info bg-opacity-10 rounded-circle p-3">
+              <i class="bi bi-shield-check text-info fs-1"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="fw-bold mb-2">100% de Segurança</h5>
+            <p class="text-muted mb-0">Dados protegidos com criptografia de ponta e conformidade com LGPD.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Multi-Clinic Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h2 class="display-6 fw-bold text-dark mb-4">Perfeito para Optometristas Itinerantes</h2>
+        <p class="lead text-muted mb-4">Gerencie múltiplas clínicas com facilidade e padronização</p>
+        
+        <div class="clinic-features">
+          <div class="d-flex align-items-center mb-3">
+            <div class="bg-success rounded-circle p-2 me-3">
+              <i class="bi bi-check text-white"></i>
+            </div>
+            <span class="fw-bold">Troca rápida entre clínicas</span>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <div class="bg-success rounded-circle p-2 me-3">
+              <i class="bi bi-check text-white"></i>
+            </div>
+            <span class="fw-bold">Configurações individuais por unidade</span>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <div class="bg-success rounded-circle p-2 me-3">
+              <i class="bi bi-check text-white"></i>
+            </div>
+            <span class="fw-bold">Receitas com cabeçalho automático</span>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <div class="bg-success rounded-circle p-2 me-3">
+              <i class="bi bi-check text-white"></i>
+            </div>
+            <span class="fw-bold">Agenda consolidada</span>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <div class="bg-success rounded-circle p-2 me-3">
+              <i class="bi bi-check text-white"></i>
+            </div>
+            <span class="fw-bold">Prontuários sincronizados</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="clinic-mockup text-center">
+          <div class="position-relative">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 400' style='background:%23667eea'><text x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='20' font-family='Arial'>Múltiplas Clínicas</text></svg>" alt="Múltiplas Clínicas" class="img-fluid rounded-4 shadow-lg">
+            <div class="floating-clinic-card position-absolute" style="top: 20%; right: -20px;">
+              <div class="card bg-white shadow-lg rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-building text-primary fs-4 me-2"></i>
+                  <div>
+                    <div class="fw-bold">Clínica A</div>
+                    <small class="text-muted">Ativo</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="floating-clinic-card position-absolute" style="bottom: 20%; left: -20px;">
+              <div class="card bg-white shadow-lg rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-building text-success fs-4 me-2"></i>
+                  <div>
+                    <div class="fw-bold">Clínica B</div>
+                    <small class="text-muted">Sincronizado</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">Perguntas Frequentes</h2>
+        <p class="lead text-muted">Tire suas dúvidas sobre o VisareApp</p>
+      </div>
+    </div>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item border-0 shadow-sm mb-3">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                Como funciona o período de teste gratuito?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Oferecemos 14 dias de teste gratuito sem compromisso. Você pode usar todos os recursos do plano Professional durante esse período. Não é necessário cartão de crédito.
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 shadow-sm mb-3">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                Meus dados estão seguros?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Sim! Utilizamos criptografia de ponta e servidores seguros no Brasil. Estamos em conformidade com a LGPD e seguimos as melhores práticas de segurança da indústria.
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 shadow-sm mb-3">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                Posso migrar meus dados existentes?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Claro! Nossa equipe de suporte ajuda você a migrar todos os dados da sua clínica de forma segura e rápida. O processo é simples e não interrompe suas atividades.
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 shadow-sm mb-3">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                O suporte é realmente 24/7?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Sim! Nossa equipe de suporte brasileira está disponível 24 horas por dia, 7 dias por semana. Você pode nos contatar por chat, e-mail ou telefone a qualquer momento.
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 shadow-sm mb-3">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                Posso cancelar a qualquer momento?
+              </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Absolutamente! Você pode cancelar sua assinatura a qualquer momento, sem multas ou taxas ocultas. Seus dados ficam disponíveis por 30 dias após o cancelamento.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">Planos que cabem no seu bolso</h2>
+        <p class="lead text-muted">Escolha o plano ideal para sua prática</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              <h5 class="fw-bold">Starter</h5>
+              <div class="h2 fw-bold text-primary mb-0">R$ 99</div>
+              <small class="text-muted">/mês</small>
+            </div>
+            <ul class="list-unstyled">
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Até 500 pacientes</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Agendamento básico</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Receitas digitais</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Suporte por e-mail</li>
+            </ul>
+            <button class="btn btn-outline-primary w-100">Escolher Plano</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-lg" data-aos="fade-up" data-aos-delay="200" style="transform: scale(1.05);">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              <span class="badge bg-warning text-dark mb-2">Mais Popular</span>
+              <h5 class="fw-bold">Professional</h5>
+              <div class="h2 fw-bold text-primary mb-0">R$ 199</div>
+              <small class="text-muted">/mês</small>
+            </div>
+            <ul class="list-unstyled">
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Até 2000 pacientes</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Agendamento avançado</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Relatórios detalhados</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Suporte prioritário</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Integração com WhatsApp</li>
+            </ul>
+            <button class="btn btn-primary w-100">Escolher Plano</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              <h5 class="fw-bold">Enterprise</h5>
+              <div class="h2 fw-bold text-primary mb-0">R$ 399</div>
+              <small class="text-muted">/mês</small>
+            </div>
+            <ul class="list-unstyled">
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Pacientes ilimitados</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Múltiplas clínicas</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>API personalizada</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Suporte 24/7</li>
+              <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Treinamento incluído</li>
+            </ul>
+            <button class="btn btn-outline-primary w-100">Escolher Plano</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 bg-white">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">Fale Conosco</h2>
+        <p class="lead text-muted">Estamos aqui para ajudar sua prática a crescer</p>
+      </div>
+    </div>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input type="text" class="form-control" placeholder="Seu nome">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">E-mail</label>
+                <input type="email" class="form-control" placeholder="seu@email.com">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                <input type="tel" class="form-control" placeholder="(11) 99999-9999">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Mensagem</label>
+                <textarea class="form-control" rows="4" placeholder="Conte-nos sobre sua prática"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Enviar Mensagem</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <h2 class="display-5 fw-bold text-white mb-4">Pronto para transformar sua prática?</h2>
+        <p class="lead text-white-50 mb-5">Comece hoje mesmo com 14 dias de teste gratuito. Sem compromisso, sem cartão de crédito.</p>
+        
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <button class="btn btn-warning btn-lg px-5 py-3 fw-bold shadow-lg" id="ctaStart">
+            <i class="bi bi-rocket me-2"></i>Começar Agora
+          </button>
+          <button class="btn btn-outline-light btn-lg px-5 py-3 fw-bold" id="ctaContact">
+            <i class="bi bi-chat-dots me-2"></i>Falar com Especialista
+          </button>
+        </div>
+        
+        <div class="mt-4 text-white-50">
+          <small><i class="bi bi-shield-check me-1"></i>100% seguro • Dados protegidos • Suporte brasileiro</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5 class="fw-bold mb-3">
+          <i class="bi bi-eye me-2"></i>VisareApp
+        </h5>
+        <p class="text-muted">O sistema completo para optometristas que querem crescer e se destacar no mercado.</p>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-white"><i class="bi bi-facebook fs-5"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-linkedin fs-5"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-whatsapp fs-5"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-lg-2">
+        <h6 class="fw-bold mb-3">Produto</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Recursos</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Planos</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Demo</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">API</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-lg-2">
+        <h6 class="fw-bold mb-3">Suporte</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Central de Ajuda</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Documentação</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Contato</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Status</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-lg-2">
+        <h6 class="fw-bold mb-3">Empresa</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Sobre</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Blog</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Carreiras</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Imprensa</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-lg-2">
+        <h6 class="fw-bold mb-3">Legal</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Privacidade</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Termos</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Cookies</a></li>
+          <li class="mb-2"><a href="#" class="text-muted text-decoration-none">LGPD</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <hr class="my-4">
+    
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <small class="text-muted">&copy; 2024 VisareApp. Todos os direitos reservados.</small>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <small class="text-muted">Feito com ❤️ no Brasil</small>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CSS Custom Styles -->
+<style>
+/* Glassmorphism */
+.glass-card {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Floating Shapes Animation */
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+  width: 60px;
+  height: 60px;
+  top: 15%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  right: 5%;
+  animation-delay: 2s;
+}
+
+.shape-3 {
+  width: 40px;
+  height: 40px;
+  top: 30%;
+  right: 15%;
+  animation-delay: 4s;
+}
+
+.shape-4 {
+  width: 70px;
+  height: 70px;
+  bottom: 15%;
+  left: 10%;
+  animation-delay: 1s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Device Mockup */
+.device-mockup {
+  position: relative;
+  transform: perspective(1000px) rotateY(-15deg) rotateX(10deg);
+  transition: transform 0.3s ease;
+}
+
+.device-mockup:hover {
+  transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+}
+
+.device-screen {
+  background: #000;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Floating Cards */
+.floating-card {
+  position: absolute;
+  animation: floatCard 4s ease-in-out infinite;
+}
+
+.card-1 {
+  top: 15%;
+  right: 5%;
+  animation-delay: 0s;
+}
+
+.card-2 {
+  bottom: 20%;
+  left: 0%;
+  animation-delay: 2s;
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Feature Cards */
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+
+/* Features Section */
+#features {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 400px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .floating-card {
+    display: none;
+  }
+  
+  .device-mockup {
+    transform: none;
+  }
+}
+
+/* Benefit Cards */
+.benefit-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+/* Clinic Cards */
+.floating-clinic-card {
+  animation: floatClinic 3s ease-in-out infinite;
+}
+
+.floating-clinic-card:nth-child(2) {
+  animation-delay: 1.5s;
+}
+
+@keyframes floatClinic {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Step Numbers */
+.step-number {
+  transition: transform 0.3s ease;
+}
+
+.step-number:hover {
+  transform: scale(1.1);
+}
+
+/* FAQ Accordion */
+.accordion-button:not(.collapsed) {
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+}
+</style>
+
+<!-- JavaScript Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.js"></script>
+
+<script>
+// Initialize AOS
+AOS.init({
+  duration: 1000,
+  once: true
+});
+
+// Ensure features section is visible
+document.addEventListener('DOMContentLoaded', function() {
+  const featuresSection = document.getElementById('features');
+  if (featuresSection) {
+    featuresSection.style.display = 'block';
+    featuresSection.style.visibility = 'visible';
+    featuresSection.style.opacity = '1';
+  }
+});
+
+// GSAP Animations
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero Section Animations
+gsap.from(".glass-card", {
+  duration: 1.5,
+  y: 100,
+  opacity: 0,
+  ease: "power3.out"
+});
+
+gsap.from("#heroDevice", {
+  duration: 1.5,
+  x: 100,
+  opacity: 0,
+  delay: 0.5,
+  ease: "power3.out"
+});
+
+gsap.from(".floating-card", {
+  duration: 1,
+  scale: 0,
+  opacity: 0,
+  delay: 1,
+  stagger: 0.2,
+  ease: "back.out(1.7)"
+});
+
+// Floating shapes animation
+gsap.to(".shape", {
+  y: -20,
+  rotation: 180,
+  duration: 6,
+  repeat: -1,
+  yoyo: true,
+  ease: "power2.inOut",
+  stagger: 1
+});
+
+// CTA Button Interactions
+document.getElementById('ctaDemo').addEventListener('click', function() {
+  Swal.fire({
+    title: 'Demo Gratuito',
+    text: 'Vamos agendar uma demonstração personalizada para sua prática?',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#ffc107',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Agendar Demo',
+    cancelButtonText: 'Mais tarde'
+  });
+});
+
+document.getElementById('ctaPlanos').addEventListener('click', function() {
+  // Scroll to pricing section or open modal
+  Swal.fire({
+    title: 'Planos Disponíveis',
+    html: `
+      <div class="text-start">
+        <div class="mb-3">
+          <h6 class="fw-bold">Starter - R$ 99/mês</h6>
+          <small>Até 500 pacientes</small>
+        </div>
+        <div class="mb-3">
+          <h6 class="fw-bold">Professional - R$ 199/mês</h6>
+          <small>Até 2000 pacientes</small>
+        </div>
+        <div class="mb-3">
+          <h6 class="fw-bold">Enterprise - R$ 399/mês</h6>
+          <small>Pacientes ilimitados</small>
+        </div>
+      </div>
+    `,
+    icon: 'info',
+    confirmButtonColor: '#ffc107',
+    confirmButtonText: 'Ver Detalhes'
+  });
+});
+
+document.getElementById('ctaStart').addEventListener('click', function() {
+  Swal.fire({
+    title: 'Iniciar Teste Gratuito',
+    text: 'Vamos criar sua conta agora mesmo?',
+    icon: 'success',
+    showCancelButton: true,
+    confirmButtonColor: '#ffc107',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Criar Conta',
+    cancelButtonText: 'Cancelar'
+  });
+});
+
+document.getElementById('ctaContact').addEventListener('click', function() {
+  Swal.fire({
+    title: 'Falar com Especialista',
+    text: 'Deixe seu contato para conversarmos sobre sua prática',
+    input: 'email',
+    inputPlaceholder: 'Seu e-mail',
+    showCancelButton: true,
+    confirmButtonColor: '#ffc107',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Enviar',
+    cancelButtonText: 'Cancelar'
+  });
+});
+
+// Scroll animations
+gsap.utils.toArray('.feature-card').forEach(card => {
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: "top 80%",
+      end: "bottom 20%",
+      toggleActions: "play none none reverse"
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8
+  });
+});
+
+// Benefit cards animations
+gsap.utils.toArray('.benefit-card').forEach(card => {
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: "top 80%",
+      end: "bottom 20%",
+      toggleActions: "play none none reverse"
+    },
+    x: card.classList.contains('fade-left') ? -50 : 50,
+    opacity: 0,
+    duration: 0.8
+  });
+});
+
+// Step numbers animations
+gsap.utils.toArray('.step-number').forEach((step, index) => {
+  gsap.from(step, {
+    scrollTrigger: {
+      trigger: step,
+      start: "top 80%",
+      end: "bottom 20%",
+      toggleActions: "play none none reverse"
+    },
+    scale: 0,
+    opacity: 0,
+    duration: 0.6,
+    delay: index * 0.2
+  });
+});
+
+// Clinic cards floating animation
+gsap.to('.floating-clinic-card', {
+  y: -10,
+  duration: 2,
+  repeat: -1,
+  yoyo: true,
+  ease: "power2.inOut",
+  stagger: 1
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Navbar background change on scroll
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(102, 126, 234, 0.98)';
+    } else {
+        navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+    }
+});
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html> 
