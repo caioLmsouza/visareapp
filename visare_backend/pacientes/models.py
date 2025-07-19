@@ -12,6 +12,8 @@ class Paciente(models.Model):
     telefone = models.CharField("Telefone", max_length=20, blank=True, null=True)
     responsavel = models.CharField("Responsável", max_length=255, blank=True, null=True)
     convenio = models.CharField("Convênio/Plano de Saúde", max_length=100, blank=True, null=True)
+    ocupacao = models.CharField("Ocupação", max_length=100, blank=True, null=True)
+    cpf_responsavel = models.CharField("CPF do Responsável", max_length=14, blank=True, null=True)
     # Endereço
     rua = models.CharField("Rua", max_length=255, blank=True, null=True)
     numero = models.CharField("Número", max_length=10, blank=True, null=True)

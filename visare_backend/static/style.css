@@ -61,3 +61,11 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 4px 16px #ef87b850;
   background: #fce4f3 !important;
 } 
+
+/* FullCalendar: botão ativo (view selecionada) com rosa de destaque */
+.fc .fc-button.fc-button-active, .fc .fc-button:active {
+  background-color: #e754a6 !important; /* tom de rosa mais forte */
+  border-color: #e754a6 !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px 0 rgba(231,84,166,0.15);
+} 

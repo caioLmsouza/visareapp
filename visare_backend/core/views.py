@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from .models import CustomUser
 from .serializers import CustomUserSerializer
 from django.shortcuts import render
+from clinicas.models import Clinica
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
@@ -14,7 +15,8 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 def pacientes(request):
-    return render(request, 'pacientes.html')
+    clinicas = Clinica.objects.all()
+    return render(request, 'pacientes.html', {'clinicas': clinicas})
 
 def clinicas(request):
     return render(request, 'clinicas.html')

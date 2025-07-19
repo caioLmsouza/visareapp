@@ -3,7 +3,7 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
   <h1 class="text-2xl fw-bold text-black mb-0">Consultas</h1>
-  <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow ms-auto"><i class="bi bi-calendar-plus me-1"></i> Nova Consulta</button>
+  
 </div>
 
 <!-- Tabs para alternar entre Lista e Agenda -->
@@ -17,83 +17,14 @@
 </ul>
 <div class="tab-content" id="consultasTabsContent">
   <div class="tab-pane fade show active" id="lista" role="tabpanel">
-    <!-- Filtros Inteligentes -->
-    <div class="card shadow-sm rounded p-3 mb-4">
-      <form class="row g-2 align-items-end" autocomplete="off">
-        <div class="col-md-3">
-          <label class="form-label mb-1">Paciente</label>
-          <div class="input-group">
-            <span class="input-group-text"><i class="bi bi-person"></i></span>
-            <input type="text" class="form-control" placeholder="Buscar por paciente..." name="paciente">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label mb-1">Profissional</label>
-          <select class="form-select" name="profissional">
-            <option>Todos</option>
-            <option>Dra. Fernanda</option>
-            <option>Dr. João</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label mb-1">Clínica</label>
-          <select class="form-select" name="clinica">
-            <option>Todas</option>
-            <option>Clínica A</option>
-            <option>Clínica B</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label mb-1">Data</label>
-          <input type="date" class="form-control" name="data">
-        </div>
-        <div class="col-md-2">
-          <label class="form-label mb-1">Status</label>
-          <select class="form-select" name="status">
-            <option>Todos</option>
-            <option>Agendada</option>
-            <option>Realizada</option>
-            <option>Cancelada</option>
-            <option>Vencida</option>
-            <option>Em atendimento</option>
-          </select>
-        </div>
-        <div class="col-md-1 d-flex gap-2">
-          <button type="submit" class="btn btn-rosa w-100"><i class="bi bi-search"></i></button>
-          <button type="reset" class="btn btn-outline-rosa w-100"><i class="bi bi-x-lg"></i></button>
-        </div>
-      </form>
-    </div>
-    <!-- Painel de Performance -->
-    <div class="row g-4 mb-4">
-      <div class="col-12 col-md-3">
-        <div class="bg-white rounded-lg shadow-md p-3 text-center">
-          <div class="fw-semibold text-black mb-1">Total do Dia</div>
-          <div class="fs-4 fw-bold text-color1">{{ total_hoje|default:'18' }}</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-3">
-        <div class="bg-white rounded-lg shadow-md p-3 text-center">
-          <div class="fw-semibold text-black mb-1">Faltas</div>
-          <div class="fs-4 fw-bold text-danger">{{ faltas_hoje|default:'2' }}</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-3">
-        <div class="bg-white rounded-lg shadow-md p-3 text-center">
-          <div class="fw-semibold text-black mb-1">Canceladas</div>
-          <div class="fs-4 fw-bold text-warning">{{ canceladas_hoje|default:'1' }}</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-3">
-        <div class="bg-white rounded-lg shadow-md p-3 text-center">
-          <div class="fw-semibold text-black mb-1">Atendidas</div>
-          <div class="fs-4 fw-bold text-success">{{ atendidas_hoje|default:'15' }}</div>
-        </div>
-      </div>
-    </div>
+
+
     <!-- Sala de Espera (ao vivo) -->
     <div class="card shadow-sm rounded p-3 mb-4">
-      <div class="fw-semibold text-black mb-2"><i class="bi bi-people me-1"></i> Sala de Espera</div>
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="fw-semibold text-black"><i class="bi bi-people me-1"></i> Sala de Espera</div>
+        <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow" id="btnNovaConsulta"><i class="bi bi-calendar-plus me-1"></i> Nova Consulta</button>
+      </div>
       <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
           <thead class="bg-color4 text-black text-uppercase text-xs tracking-wide">
@@ -133,11 +64,82 @@
         </table>
       </div>
     </div>
+
+        <!-- Painel de Performance -->
+        <div class="row g-4 mb-4">
+          <div class="col-12 col-md-3">
+            <div class="bg-white rounded-lg shadow-md p-3 text-center">
+              <div class="fw-semibold text-black mb-1">Total do Dia</div>
+              <div class="fs-4 fw-bold text-color1">{{ total_hoje|default:'18' }}</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="bg-white rounded-lg shadow-md p-3 text-center">
+              <div class="fw-semibold text-black mb-1">Faltas</div>
+              <div class="fs-4 fw-bold text-danger">{{ faltas_hoje|default:'2' }}</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="bg-white rounded-lg shadow-md p-3 text-center">
+              <div class="fw-semibold text-black mb-1">Canceladas</div>
+              <div class="fs-4 fw-bold text-warning">{{ canceladas_hoje|default:'1' }}</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="bg-white rounded-lg shadow-md p-3 text-center">
+              <div class="fw-semibold text-black mb-1">Atendidas</div>
+              <div class="fs-4 fw-bold text-success">{{ atendidas_hoje|default:'15' }}</div>
+            </div>
+          </div>
+        </div>
+        <!-- Filtros Inteligentes -->
+        <div class="card shadow-sm rounded p-3 mb-4">
+          <form class="row g-2 align-items-end" autocomplete="off">
+            <div class="col-md-3">
+              <label class="form-label mb-1">Paciente</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control" placeholder="Buscar por paciente..." name="paciente">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label mb-1">CPF</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control" placeholder="Buscar por CPF..." name="paciente">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label mb-1">Clínica</label>
+              <select class="form-select" name="clinica">
+                <option>Todas</option>
+                <option>Clínica A</option>
+                <option>Clínica B</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label mb-1">Data</label>
+              <input type="date" class="form-control" name="data">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label mb-1">Status</label>
+              <select class="form-select" name="status">
+                <option>Todos</option>
+                <option>Agendada</option>
+                <option>Realizada</option>
+                <option>Cancelada</option>
+                <option>Vencida</option>
+                <option>Em atendimento</option>
+              </select>
+            </div>
+          </form>
+        </div>
     <!-- Tabela de Consultas -->
     <div class="table-responsive">
       <table class="table table-striped bg-white rounded-lg shadow-md overflow-hidden align-middle">
         <thead class="bg-color4 text-black text-uppercase text-xs tracking-wide">
           <tr>
+            <th>Nº</th>
             <th>Paciente</th>
             <th>Data</th>
             <th>Horário</th>
@@ -152,6 +154,7 @@
         <tbody>
           {% for consulta in consultas %}
           <tr class="hover-shadow-sm" tabindex="0">
+            <td class="fw-bold text-black">{{ forloop.counter }}ª</td>
             <td class="fw-semibold text-black">{{ consulta.paciente }}</td>
             <td class="text-black">{{ consulta.data }}</td>
             <td class="text-black">{{ consulta.horario }}</td>
@@ -202,26 +205,7 @@
       <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <h2 class="fw-bold text-black mb-0"><i class="bi bi-calendar-week me-2 text-color1"></i> Agenda da Clínica</h2>
         <div class="d-flex gap-2 flex-wrap">
-          <select class="form-select" id="agendaProfissional" style="max-width: 180px;">
-            <option>Todos os profissionais</option>
-            <option>Dra. Fernanda</option>
-            <option>Dr. João</option>
-          </select>
-          <select class="form-select" id="agendaTipo" style="max-width: 140px;">
-            <option>Todos os tipos</option>
-            <option>Rotina</option>
-            <option>Retorno</option>
-            <option>Urgência</option>
-          </select>
-          <select class="form-select" id="agendaStatus" style="max-width: 120px;">
-            <option>Todos os status</option>
-            <option>Agendada</option>
-            <option>Realizada</option>
-            <option>Cancelada</option>
-            <option>Vencida</option>
-          </select>
-          <button class="btn btn-rosa" id="novaConsultaAgenda"><i class="bi bi-calendar-plus"></i> Nova Consulta</button>
-          <button class="btn btn-outline-rosa" id="verAgendaCompleta"><i class="bi bi-arrows-fullscreen"></i></button>
+          <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow" id="btnNovaConsulta"><i class="bi bi-calendar-plus me-1"></i> Nova Consulta</button>
         </div>
       </div>
       <div id="fullcalendar" class="rounded shadow-sm" style="background: #fff; min-height: 600px;"></div>
@@ -236,13 +220,15 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('fullcalendar');
+  var calendar;
   if (calendarEl) {
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'timeGridWeek',
       locale: 'pt-br',
       themeSystem: 'bootstrap5',
+      allDaySlot: false,
       headerToolbar: {
-        left: 'prev,next today',
+        left: 'prev,next',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
@@ -267,6 +253,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     calendar.render();
+  }
+
+  // Corrigir layout ao abrir a aba Agenda
+  var agendaTab = document.getElementById('agenda-tab');
+  if (agendaTab && calendar) {
+    agendaTab.addEventListener('shown.bs.tab', function () {
+      setTimeout(function() {
+        calendar.updateSize();
+      }, 10);
+    });
   }
 });
 </script>

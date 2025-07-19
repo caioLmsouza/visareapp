@@ -3,56 +3,64 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
   <h1 class="text-2xl fw-bold text-black mb-0">Pacientes</h1>
-  <button class="btn btn-rosa px-4 py-2 rounded-lg fw-semibold shadow ms-auto"><i class="bi bi-person-plus me-1"></i> Novo Paciente</button>
 </div>
 
 <!-- Filtros Avançados -->
 <div class="card shadow-sm rounded p-3 mb-4">
-  <form class="row g-2 align-items-end" autocomplete="off">
-    <div class="col-md-3">
-      <label class="form-label mb-1">Nome</label>
-      <div class="input-group">
-        <span class="input-group-text"><i class="bi bi-person"></i></span>
-        <input type="text" class="form-control" placeholder="Buscar por nome..." name="nome">
-      </div>
+  <form class="row g-2 align-items-end" autocomplete="off" id="form-paciente">
+
+    <div class="col-md-6">
+      <label class="form-label mb-1">Nome completo</label>
+      <input type="text" class="form-control" name="nome" placeholder="Nome completo">
     </div>
     <div class="col-md-2">
+      <label class="form-label mb-1">Gênero</label>
+      <select class="form-select" name="genero">
+        <option value="">Selecione</option>
+        <option value="F">Feminino</option>
+        <option value="M">Masculino</option>
+        <option value="O">Outro</option>
+      </select>
+    </div>
+    <div class="col-md-4">
       <label class="form-label mb-1">CPF</label>
-      <div class="input-group">
-        <span class="input-group-text"><i class="bi bi-credit-card"></i></span>
-        <input type="text" class="form-control" placeholder="Buscar por CPF..." name="cpf">
-      </div>
+      <input type="text" class="form-control" name="cpf" placeholder="CPF">
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <label class="form-label mb-1">Data de Nascimento</label>
-      <input type="date" class="form-control" name="data_nascimento">
+      <input type="date" class="form-control" name="data_nascimento" id="data_nascimento">
     </div>
-    <div class="col-md-2">
-      <label class="form-label mb-1">Clínica</label>
-      <select class="form-select" name="clinica">
-        <option>Todas</option>
-        <option>Clínica A</option>
-        <option>Clínica B</option>
-      </select>
+
+    <div class="col-md-3">
+      <label class="form-label mb-1">E-mail</label>
+      <input type="email" class="form-control" name="email" placeholder="E-mail">
     </div>
-    <div class="col-md-2">
-      <label class="form-label mb-1">Status</label>
-      <select class="form-select" name="status">
-        <option>Todos</option>
-        <option>Ativo</option>
-        <option>Inativo</option>
-        <option>Em tratamento</option>
-      </select>
+    <div class="col-md-3">
+      <label class="form-label mb-1">Telefone</label>
+      <input type="text" class="form-control" name="telefone" placeholder="Telefone">
     </div>
-    <div class="col-md-1 d-flex gap-2">
-      <button type="submit" class="btn btn-rosa w-100"><i class="bi bi-search"></i></button>
-      <button type="reset" class="btn btn-outline-secondary w-100"><i class="bi bi-x-lg"></i></button>
+    <div class="col-md-3">
+      <label class="form-label mb-1">Ocupação</label>
+      <input type="text" class="form-control" name="ocupacao" placeholder="Ocupação">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label mb-1">Nome do Responsável</label>
+      <input type="text" class="form-control" name="responsavel" placeholder="Nome do responsável">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label mb-1">CPF do Responsável</label>
+      <input type="text" class="form-control" name="cpf_responsavel" placeholder="CPF do responsável">
+    </div>
+    <div class="col-12 d-flex gap-2 mt-2">
+      <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Salvar</button>
+      <button type="button" class="btn btn-primary" id="btn-enviar-fila" data-bs-toggle="modal" data-bs-target="#modalAgendar"><i class="bi bi-send"></i> Enviar para Fila</button>
+      <button type="reset" class="btn btn-secondary"><i class="bi bi-x-lg"></i> Limpar</button>
     </div>
   </form>
 </div>
 
 <!-- Tabela de Pacientes -->
-<div class="table-responsive">
+<div class="table-responsive rounded">
   <table class="table table-striped bg-white rounded-lg shadow-md overflow-hidden align-middle">
     <thead class="bg-color4 text-black text-uppercase text-xs tracking-wide">
       <tr>
@@ -110,6 +118,81 @@
       <li class="page-item"><a class="page-link" href="#">Próximo &raquo;</a></li>
     </ul>
   </nav>
-  <button class="btn btn-outline-secondary btn-sm ms-2"><i class="bi bi-download"></i> Exportar</button>
 </div>
+
+<!-- Modal Agendar Consulta -->
+<div class="modal fade" id="modalAgendar" tabindex="-1" aria-labelledby="modalAgendarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAgendarLabel">Agendar Consulta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form-agendar-consulta">
+          <div class="mb-3">
+            <label for="data-consulta" class="form-label">Data da Consulta</label>
+            <input type="date" class="form-control" id="data-consulta" name="data-consulta" required>
+          </div>
+          <div class="mb-3">
+            <label for="clinica-consulta" class="form-label">Clínica</label>
+            <select class="form-select" id="clinica-consulta" name="clinica-consulta" required>
+              <option value="">Selecione a clínica</option>
+              {% if clinicas and clinicas|length > 0 %}
+                {% for clinica in clinicas %}
+                  <option value="{{ clinica.id }}">{{ clinica.nome }}</option>
+                {% endfor %}
+              {% else %}
+                <option value="">Nenhuma clínica cadastrada</option>
+              {% endif %}
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn-agendar">Agendar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const btnAgendar = document.getElementById('btn-agendar');
+    const btnEnviarFila = document.getElementById('btn-enviar-fila');
+    const modalAgendar = document.getElementById('modalAgendar');
+    
+    if (!btnAgendar) {
+      console.error('Botão Agendar não encontrado!');
+    } else {
+      btnAgendar.addEventListener('click', function() {
+        console.log('Botão Agendar clicado');
+        window.location.href = '/fichas/';
+      });
+    }
+
+    if (!btnEnviarFila) {
+      console.error('Botão Enviar para Fila não encontrado!');
+    } else {
+      btnEnviarFila.addEventListener('click', function() {
+        console.log('Botão Enviar para Fila clicado');
+        // Forçar abertura do modal via JS para garantir
+        if (modalAgendar) {
+          try {
+            const modal = new bootstrap.Modal(modalAgendar);
+            modal.show();
+            console.log('Modal chamado via JS');
+          } catch (e) {
+            console.error('Erro ao abrir modal via JS:', e);
+          }
+        } else {
+          console.error('Elemento do modal não encontrado!');
+        }
+      });
+    }
+  });
+</script>
 {% endblock %} 
